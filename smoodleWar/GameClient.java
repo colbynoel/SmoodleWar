@@ -1,5 +1,8 @@
 package smoodleWar;
 
-public class GameClient {
+import javax.swing.*;
 
+public class GameClient extends JFrame
+{
+	
 }
