@@ -4,10 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.IOException;
-<<<<<<< Updated upstream
 import java.sql.SQLException;
-=======
->>>>>>> Stashed changes
 
 public class ServerGUI extends JFrame
 {
@@ -20,36 +17,21 @@ public class ServerGUI extends JFrame
   private JButton close;
   private JButton stop;
   private JButton quit;
-<<<<<<< Updated upstream
   private GameServer server;
   private Database database;
 
   // Constructor for the server GUI.
 	public ServerGUI() throws SQLException, IOException
-=======
-  private ChatServer server;
-
-  // Constructor for the server GUI.
-	public ServerGUI()
->>>>>>> Stashed changes
 	{	
 	  // Create the main variables that will be used.
     JPanel north = new JPanel();
     JPanel center = new JPanel(new BorderLayout());
     JPanel south = new JPanel();
     EventHandler handler = new EventHandler();
-<<<<<<< Updated upstream
-    database = new Database();
     int i = 0;
     
     // Set the title and default close operation.
     this.setTitle("Smoodle Server");
-=======
-    int i = 0;
-    
-    // Set the title and default close operation.
-    this.setTitle("Chat Server");
->>>>>>> Stashed changes
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     // Create the status label.
@@ -120,21 +102,14 @@ public class ServerGUI extends JFrame
     this.setVisible(true);
     
     // Set up the chat server object.
-<<<<<<< Updated upstream
     server = new GameServer();
-=======
-    server = new ChatServer();
->>>>>>> Stashed changes
+
     server.setLog(log);
     server.setStatus(status);
 	}
 	
 	// Main function that creates a server GUI when the program is started.
-<<<<<<< Updated upstream
 	public static void main(String[] args) throws SQLException, IOException
-=======
-	public static void main(String[] args)
->>>>>>> Stashed changes
 	{
 		new ServerGUI();
 	}
