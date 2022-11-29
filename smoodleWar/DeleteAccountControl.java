@@ -1,8 +1,6 @@
 package smoodleWar;
 
-
-
 public class DeleteAccountControl {
-	//CODE GOES HERE
+	// CODE GOES HERE
 
 }
