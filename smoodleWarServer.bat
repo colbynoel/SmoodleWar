@@ -1,1 +1,1 @@
-java -cp .;ocsf.jar smoodleWar.ServerGUI 8300 500
+java -cp .;ocsf.jar smoodleWar.ServerGUI
