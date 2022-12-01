@@ -1,15 +1,2 @@
-/ChatClient.class
-/CreateAccountControl.class
-/CreateAccountData.class
-/CreateAccountPanel.class
-/Database.class
-/DeleteAccountControl.class
-/DeleteAccountPanel.class
-/InitialControl.class
-/InitialPanel.class
-/LoginControl.class
-/LoginData.class
-/LoginPanel.class
-/GameData.class
-/GameClient.class
-/GameControl.class
+/*.class
+
