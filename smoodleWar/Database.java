@@ -99,5 +99,24 @@ public class Database {
 		}
 
 	}
+	
+	public String getPrompt() throws SQLException {
+		ArrayList<String> list = new ArrayList<String>();
+		Statement statement = conn.createStatement();
+		ResultSet rs = statement.executeQuery("SELECT * FROM prompts");
+		int random = (int)(Math.random()*15);
+		int count = 0;
+		while(rs.next()) {
+			String prompt = rs.getString("prompt");
+			
+			if (count == random) {
+				System.out.println(prompt);
+				return prompt;
+			}
+			count++;
+		}
+		return "null";
+		
+	}
 
 }
