@@ -26,7 +26,7 @@ public class GameClient extends AbstractClient {
 		this.createAccountControl = createAccountControl;
 	}
 
-	public void deleteAccountControl(DeleteAccountControl deleteAccountControl) {
+	public void setDeleteAccountControl(DeleteAccountControl deleteAccountControl) {
 		this.deleteAccountControl = deleteAccountControl;
 	}
 
