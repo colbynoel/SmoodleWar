@@ -44,10 +44,18 @@ public class ClientGUI extends JFrame {
 		JPanel view4 = new DeleteAccountPanel(dac);
 
 		// Add the views to the card layout container.
+		//Initial
 		container.add(view1, "1");
+		//Login
 		container.add(view2, "2");
+		//Create Account
 		container.add(view3, "3");
+		//Delete Account
 		container.add(view4, "4");
+		//Lobby
+		container.add(view4, "5");
+		//Gameplay
+		container.add(view4, "6");
 
 		// Show the initial view in the card layout.
 		cardLayout.show(container, "1");
