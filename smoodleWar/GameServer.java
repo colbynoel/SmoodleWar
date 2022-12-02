@@ -110,6 +110,11 @@ public class GameServer extends AbstractServer {
 				return;
 			}
 		}
+		
+		else if (arg0 instanceof Graphics) {
+			Graphics drawing = (Graphics) arg0;
+			
+		}
 	}
 
 	// Method that handles listening exceptions by displaying exception information.
