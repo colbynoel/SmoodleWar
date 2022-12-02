@@ -57,11 +57,12 @@ public class LoginControl implements ActionListener {
 
 	// After the login is successful, set the User object and display the contacts
 	// screen.
-	public void loginSuccess() {
+	public String loginSuccess() {
 		LoginPanel loginPanel = (LoginPanel) container.getComponent(1);
 
 		CardLayout cardLayout = (CardLayout) container.getLayout();
 		cardLayout.show(container, "4");
+		return loginPanel.getUsername();
 	}
 
 	// Method that displays a message in the error label.
