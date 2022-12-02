@@ -10,10 +10,10 @@ import javax.swing.SwingUtilities;
 public class DeleteAccountControl implements ActionListener {
 	// Private data fields for the container and chat client.
 	private JPanel container;
-	private ChatClient client;
+	private GameClient client;
 
 	// Constructor for the create account controller.
-	public DeleteAccountControl(JPanel container, ChatClient client) {
+	public DeleteAccountControl(JPanel container, GameClient client) {
 		this.container = container;
 		this.client = client;
 	}

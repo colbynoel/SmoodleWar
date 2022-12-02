@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 // all in DrawingPanel is the only way I know to make this work.
 
 public class DrawingPanel extends JPanel {
-	DrawingField drawingField;
+	private DrawingField drawingField;
 	private JLabel prompt;
 	private JLabel role;
 	
@@ -29,15 +29,7 @@ public class DrawingPanel extends JPanel {
 		this.role = role;
 	}
 	
-	public String getPrompt() {
-		return prompt.toString();
-	}
-	
-	public void setPrompt(String p) {
-		this.prompt.setText(p);
-	}
-	
-	public DrawingPanel(DrawingControl drawingControl) {
+	public DrawingPanel(GameControl drawingControl) {
 		
 		JPanel labelPanel = new JPanel(new GridLayout(2, 1, 10, 10));
 		prompt = new JLabel("", JLabel.CENTER);

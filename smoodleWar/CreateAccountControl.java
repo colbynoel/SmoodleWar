@@ -10,13 +10,17 @@ import java.io.IOException;
 public class CreateAccountControl implements ActionListener {
 	// Private data fields for the container and chat client.
 	private JPanel container;
-	private ChatClient client;
+	private GameClient client;
 
 	// Constructor for the create account controller.
-	public CreateAccountControl(JPanel container, ChatClient client) {
+
+	public CreateAccountControl(JPanel container, GameClient client)
+	{
 		this.container = container;
 		this.client = client;
 	}
+
+	
 
 	// Handle button clicks.
 	public void actionPerformed(ActionEvent ae) {
