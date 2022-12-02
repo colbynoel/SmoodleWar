@@ -1,5 +1,7 @@
 package smoodleWar;
 
+import java.awt.Graphics;
+
 import javax.swing.*;
 
 import ocsf.client.AbstractClient;
@@ -14,7 +16,6 @@ public class GameClient extends AbstractClient {
 	private LoginControl loginControl;
 	private CreateAccountControl createAccountControl;
 	private DeleteAccountControl deleteAccountControl;
-	private DrawingControl drawingControl;
 	private GameControl gameControl;
 	private String user;
 
@@ -33,14 +34,6 @@ public class GameClient extends AbstractClient {
 
 	public void setGameControl(GameControl gameControl) {
 		this.gameControl = gameControl;
-	}
-
-	public DrawingControl getDrawingControl() {
-		return drawingControl;
-	}
-
-	public void setDrawingControl(DrawingControl drawingControl) {
-		this.drawingControl = drawingControl;
 	}
 
 	@Override
@@ -81,15 +74,23 @@ public class GameClient extends AbstractClient {
 			else if (serverResponse.equals("GameOver")) {
 				gameControl.endGame();
 			}
+			
 		}
 
 		// For word prompts, the server should return an array of strings. This response
 		// is built
 		// specifically to recieve that array.
-		if (arg0 instanceof String[]) {
+		else if (arg0 instanceof String[]) {
 			String[] wordList = (String[]) arg0;
 
 			gameControl.recieveRandomPrompts(wordList);
+		}
+		
+		//Recieves Graphics object from server and sends to client to update to Guessing round if not 
+		else if (arg0 instanceof Graphics)
+		{
+			Graphics opponentDrawing = (Graphics)arg0;
+			gameControl.switchGameScreen(opponentDrawing);
 		}
 
 		// If we received an Error, figure out where to display it.
