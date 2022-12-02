@@ -6,8 +6,7 @@ import java.awt.event.*;
 
 //COPIED FROM LAB5OUT
 
-public class CreateAccountPanel extends JPanel
-{
+public class CreateAccountPanel extends JPanel {
 	// Private data fields for the important GUI components.
 	private JTextField usernameField;
 	private JPasswordField passwordField;
@@ -15,42 +14,34 @@ public class CreateAccountPanel extends JPanel
 	private JLabel errorLabel;
 
 	// Getter for the text in the username field.
-	public String getUsername()
-	{
+	public String getUsername() {
 		return usernameField.getText();
 	}
 
 	// Getter for the text in the password field.
-	public String getPassword()
-	{
+	public String getPassword() {
 		return new String(passwordField.getPassword());
 	}
 
 	// Getter for the text in the second password field.
-	public String getPasswordVerify()
-	{
+	public String getPasswordVerify() {
 		return new String(passwordVerifyField.getPassword());
 	}
 
 	// Setter for the error text.
-	public void setError(String error)
-	{
+	public void setError(String error) {
 		errorLabel.setText(error);
 	}
 
 	// Constructor for the create account panel.
-	public CreateAccountPanel(CreateAccountControl cac)
-	{
-		// Create the controller and set it in the chat client.
-		//CreateAccountControl controller = new CreateAccountControl(container, client);
-		//client.setCreateAccountControl(controller);
+	public CreateAccountPanel(CreateAccountControl cac) {
 
 		// Create a panel for the labels at the top of the GUI.
 		JPanel labelPanel = new JPanel(new GridLayout(3, 1, 5, 5));
 		errorLabel = new JLabel("", JLabel.CENTER);
 		errorLabel.setForeground(Color.RED);
 		JLabel instructionLabel = new JLabel("Enter a username and password to create an account.", JLabel.CENTER);
-		JLabel instructionLabel2 = new JLabel("Your password must be at least 6 characters.", JLabel.CENTER);    
+		JLabel instructionLabel2 = new JLabel("Your password must be at least 6 characters.", JLabel.CENTER);
 		labelPanel.add(errorLabel);
 		labelPanel.add(instructionLabel);
 		labelPanel.add(instructionLabel2);
@@ -75,7 +66,7 @@ public class CreateAccountPanel extends JPanel
 		JButton submitButton = new JButton("Submit");
 		submitButton.addActionListener(cac);
 		JButton cancelButton = new JButton("Cancel");
-		cancelButton.addActionListener(cac);    
+		cancelButton.addActionListener(cac);
 		buttonPanel.add(submitButton);
 		buttonPanel.add(cancelButton);
 
