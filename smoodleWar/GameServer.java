@@ -12,6 +12,7 @@ public class GameServer extends AbstractServer {
 	private JLabel status;
 	private boolean running = false;
 	private Database database;
+	private JLabel score;
 
 	// Constructor for initializing the server with default settings.
 	public GameServer() {
@@ -21,6 +22,10 @@ public class GameServer extends AbstractServer {
 
 	void setDatabase(Database database) {
 		this.database = database;
+	}
+	
+	void setScore(JLabel score) {
+		this.score = score;
 	}
 
 	// Getter that returns whether the server is currently running.

@@ -10,6 +10,7 @@ public class GameData {
 	private String loser;
 	private String roomCode;
 	private String Scores;
+	
 	public ArrayList<String> getWordBank() {
 		return wordBank;
 	}
