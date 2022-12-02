@@ -31,6 +31,7 @@ public class ClientGUI extends JFrame {
 		InitialControl ic = new InitialControl(container, client);
 		LoginControl lc = new LoginControl(container, client);
 		CreateAccountControl cac = new CreateAccountControl(container, client);
+		DeleteAccountControl dac = new DeleteAccountControl(container, client);
 
 		// Set the client info
 		client.setLoginControl(lc);
@@ -40,13 +41,21 @@ public class ClientGUI extends JFrame {
 		JPanel view1 = new InitialPanel(ic);
 		JPanel view2 = new LoginPanel(lc);
 		JPanel view3 = new CreateAccountPanel(cac);
-		// JPanel view4 = new ContactsPanel();
+		JPanel view4 = new DeleteAccountPanel(dac);
 
 		// Add the views to the card layout container.
+		//Initial
 		container.add(view1, "1");
+		//Login
 		container.add(view2, "2");
+		//Create Account
 		container.add(view3, "3");
-		// container.add(view4, "4");
+		//Delete Account
+		container.add(view4, "4");
+		//Lobby
+		container.add(view4, "5");
+		//Gameplay
+		container.add(view4, "6");
 
 		// Show the initial view in the card layout.
 		cardLayout.show(container, "1");
