@@ -5,8 +5,9 @@ import javax.swing.*;
 import ocsf.client.AbstractClient;
 
 public class GameClient extends AbstractClient {
-	public GameClient(String host, int port) {
-		super(host, port);
+	
+	public GameClient() {
+		super("localhost", 8300);
 	}
 
 	// Private data fields for storing the GUI controllers.

@@ -13,15 +13,14 @@ public class CreateAccountControl implements ActionListener {
 	private GameClient client;
 
 	// Constructor for the create account controller.
-<<<<<<< HEAD
+
 	public CreateAccountControl(JPanel container, GameClient client)
 	{
-=======
-	public CreateAccountControl(JPanel container, ChatClient client) {
->>>>>>> branch 'gameControl' of https://github.com/NotColby02/SmoodleWar.git
 		this.container = container;
 		this.client = client;
 	}
+
+	
 
 	// Handle button clicks.
 	public void actionPerformed(ActionEvent ae) {

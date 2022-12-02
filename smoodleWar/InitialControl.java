@@ -9,19 +9,11 @@ import java.awt.event.*;
 public class InitialControl implements ActionListener {
 	// Private data field for storing the container.
 	private JPanel container;
-<<<<<<< HEAD
 	private GameClient client;
-=======
-	private ChatClient client;
 
->>>>>>> branch 'gameControl' of https://github.com/NotColby02/SmoodleWar.git
 	// Constructor for the initial controller.
-<<<<<<< HEAD
 	public InitialControl(JPanel container, GameClient client)
 	{
-=======
-	public InitialControl(JPanel container, ChatClient client) {
->>>>>>> branch 'gameControl' of https://github.com/NotColby02/SmoodleWar.git
 		this.container = container;
 		this.client = client;
 	}

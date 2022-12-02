@@ -9,7 +9,7 @@ public class ClientGUI extends JFrame {
 	// Constructor that creates the client GUI.
 	public ClientGUI() {
 		// Set up the chat client.
-		ChatClient client = new ChatClient();
+		GameClient client = new GameClient();
 		client.setHost("localhost");
 		client.setPort(8300);
 		try {

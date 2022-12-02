@@ -13,12 +13,8 @@ public class LoginControl implements ActionListener {
 	private GameClient client;
 
 	// Constructor for the login controller.
-<<<<<<< HEAD
 	public LoginControl(JPanel container, GameClient client)
 	{
-=======
-	public LoginControl(JPanel container, ChatClient client) {
->>>>>>> branch 'gameControl' of https://github.com/NotColby02/SmoodleWar.git
 		this.container = container;
 		this.client = client;
 	}
