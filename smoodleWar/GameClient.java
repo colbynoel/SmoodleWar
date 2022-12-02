@@ -15,6 +15,7 @@ public class GameClient extends AbstractClient {
 	private DeleteAccountControl deleteAccountControl;
 	private DrawingControl drawingControl;
 	private GameControl gameControl;
+	private String user;
 
 	// Setters for the GUI controllers.
 	public void setLoginControl(LoginControl loginControl) {
@@ -53,7 +54,7 @@ public class GameClient extends AbstractClient {
 
 			// Successful Login
 			if (serverResponse.equals("LoginSucessful")) {
-				loginControl.loginSuccess();
+				user = loginControl.loginSuccess();
 			}
 
 			// Create Account Verification

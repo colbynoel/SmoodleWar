@@ -24,8 +24,7 @@ public class DrawingControl implements ActionListener {
 		// If submit is pressed, get our drawing from the drawingPanel
 		// Then send to server.
 		if(command == "Submit") {
-			DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(2);
-			Graphics drawing = drawingPanel.getDrawing();
+			//DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(2);
 			try {
 			client.sendToServer(drawing);
 			}
