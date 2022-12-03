@@ -1,8 +1,8 @@
-package smoodleWar
+package smoodleWar;
 
 import java.io.Serializable;
 
-public class User
+public class User{
 	// Private data fields for the username and password.
 	private String username;
 	private int winCount;

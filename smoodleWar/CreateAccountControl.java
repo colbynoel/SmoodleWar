@@ -51,7 +51,7 @@ public class CreateAccountControl implements ActionListener {
 			}
 
 			// Submit the new account information to the server.
-			CreateAccountData data = new CreateAccountData(username, password);
+			CreateAccountData data = new CreateAccountData(username, password, passwordVerify);
 			try {
 				client.sendToServer(data);
 			} catch (IOException e) {
