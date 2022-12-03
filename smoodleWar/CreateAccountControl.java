@@ -72,7 +72,7 @@ public class CreateAccountControl implements ActionListener {
 		// clientGUI.setUser(new User(createAccountPanel.getUsername(),
 		// createAccountPanel.getPassword()));
 		CardLayout cardLayout = (CardLayout) container.getLayout();
-		cardLayout.show(container, "4");
+		cardLayout.show(container, "1");
 	}
 
 	// Method that displays a message in the error label.

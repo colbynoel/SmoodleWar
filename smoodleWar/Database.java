@@ -68,7 +68,7 @@ public class Database {
 
 	public boolean createNewAccount(String username, String password) {
 		String dml = String.format(
-				"insert into user(username, password, win) values ('%s', AES_ENCRYPT('%s', 'key'), %d)", username,
+				"insert into users(username, password, win) values ('%s', AES_ENCRYPT('%s', 'key'), %d)", username,
 				password, 0);
 		try {
 			this.executeDML(dml);
