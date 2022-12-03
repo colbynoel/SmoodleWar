@@ -47,7 +47,7 @@ public class GameClient extends AbstractClient {
 			String serverResponse = (String) arg0;
 
 			// Successful Login
-			if (serverResponse.equals("LoginSucessful")) {
+			if (serverResponse.equals("LoginSuccessful")) {
 				user = loginControl.loginSuccess();
 			}
 

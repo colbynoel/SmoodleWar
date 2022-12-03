@@ -84,7 +84,7 @@ public class Database {
 		ArrayList<String> list = new ArrayList<String>();
 		String[] row;
 		try {
-			list = this.query("SELECT username, aes_decrypt(password, \"key\") as password from user");
+			list = this.query("SELECT username, aes_decrypt(password, \"key\") as password from users");
 			for (int i = 0; i < list.size(); i++) {
 				row = list.get(i).split(", ", 2);
 				if (row[0].equals(username) && row[1].equals(password)) {
