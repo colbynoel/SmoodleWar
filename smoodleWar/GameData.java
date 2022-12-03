@@ -9,7 +9,7 @@ public class GameData {
 	private Graphics drawing;
 	private String loser;
 	private String roomCode;
-	private String Scores;
+	private String scores;
 	
 	public ArrayList<String> getWordBank() {
 		return wordBank;
@@ -41,11 +41,19 @@ public class GameData {
 	public void setRoomCode(String roomCode) {
 		this.roomCode = roomCode;
 	}
-	public String getScores() {
-		return Scores;
+	public String getScores(String scores) {
+		return scores;
 	}
 	public void setScores(String scores) {
-		Scores = scores;
+		this.scores = scores;
 	}
 	
+	public GameData(ArrayList<String> wordBank, String winner, Graphics drawing, String loser, String roomCode, String scores) {
+		setWordBank(wordBank);
+		setWinner(winner);
+		setDrawing(drawing);
+		setLoser(loser);
+		setRoomCode(roomCode);
+		setScores(scores);
+	}
 }
