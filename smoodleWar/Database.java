@@ -100,20 +100,14 @@ public class Database {
 
 	}
 	
-	public String getPrompt() throws SQLException {
+	public ArrayList<String> getPrompt() throws SQLException {
 		Statement statement = conn.createStatement();
 		ResultSet rs = statement.executeQuery("SELECT * FROM prompts");
-		int random = (int)(Math.random()*15);
-		int count = 0;
+		ArrayList<String> prompts = new ArrayList<String>();
 		while(rs.next()) {
-			String prompt = rs.getString("prompt");	
-			if (count == random) {
-				return prompt;
-			}
-			count++;
+			prompts.add(rs.getString("prompt"));
 		}
-		return null;
-		
+		return prompts;
 	}
 
 }
