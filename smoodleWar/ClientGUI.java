@@ -9,7 +9,7 @@ public class ClientGUI extends JFrame {
 	// Constructor that creates the client GUI.
 	public ClientGUI() {
 		// Set up the chat client.
-		ChatClient client = new ChatClient();
+		GameClient client = new GameClient();
 		client.setHost("localhost");
 		client.setPort(8300);
 		try {
@@ -32,22 +32,39 @@ public class ClientGUI extends JFrame {
 		LoginControl lc = new LoginControl(container, client);
 		CreateAccountControl cac = new CreateAccountControl(container, client);
 		DeleteAccountControl dac = new DeleteAccountControl(container, client);
+		GameControl gc = new GameControl(container, client);
+		LobbyControl lobc = new LobbyControl(container, client);
 
 		// Set the client info
 		client.setLoginControl(lc);
 		client.setCreateAccountControl(cac);
+		client.setDeleteAccountControl(dac);
+		client.setGameControl(gc);
 
 		// Create the four views. (need the controller to register with the Panels
 		JPanel view1 = new InitialPanel(ic);
 		JPanel view2 = new LoginPanel(lc);
 		JPanel view3 = new CreateAccountPanel(cac);
 		JPanel view4 = new DeleteAccountPanel(dac);
+		JPanel view5 = new DrawingPanel(gc);
+		JPanel view6 = new GuessingPanel(gc);
+		JPanel view7 = new LobbyPanel(lobc);
 
 		// Add the views to the card layout container.
+		//Initial
 		container.add(view1, "1");
+		//Login
 		container.add(view2, "2");
+		//Create Account
 		container.add(view3, "3");
+		//Delete Account
 		container.add(view4, "4");
+		//Drawing Panel
+		container.add(view5, "5");
+		//Guessing Panel
+		container.add(view6, "6");
+		//Lobby Panel
+		container.add(view7, "7");
 
 		// Show the initial view in the card layout.
 		cardLayout.show(container, "1");

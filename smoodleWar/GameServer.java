@@ -124,6 +124,7 @@ public class GameServer extends AbstractServer {
 		
 		else if (arg0 instanceof Graphics) {
 			Graphics drawing = (Graphics) arg0;
+			super.sendToAllClients(drawing);
 			
 		}
 		

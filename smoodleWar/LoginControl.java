@@ -10,10 +10,11 @@ import java.io.IOException;
 public class LoginControl implements ActionListener {
 	// Private data fields for the container and chat client.
 	private JPanel container;
-	private ChatClient client;
+	private GameClient client;
 
 	// Constructor for the login controller.
-	public LoginControl(JPanel container, ChatClient client) {
+	public LoginControl(JPanel container, GameClient client)
+	{
 		this.container = container;
 		this.client = client;
 	}
@@ -52,11 +53,12 @@ public class LoginControl implements ActionListener {
 
 	// After the login is successful, set the User object and display the contacts
 	// screen.
-	public void loginSuccess() {
+	public String loginSuccess() {
 		LoginPanel loginPanel = (LoginPanel) container.getComponent(1);
 
 		CardLayout cardLayout = (CardLayout) container.getLayout();
-		cardLayout.show(container, "4");
+		cardLayout.show(container, "7");
+		return loginPanel.getUsername();
 	}
 
 	// Method that displays a message in the error label.

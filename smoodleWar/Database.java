@@ -68,7 +68,7 @@ public class Database {
 
 	public boolean createNewAccount(String username, String password) {
 		String dml = String.format(
-				"insert into user(username, password, win) values ('%s', AES_ENCRYPT('%s', 'key'), %d)", username,
+				"insert into users(username, password, win) values ('%s', AES_ENCRYPT('%s', 'key'), %d)", username,
 				password, 0);
 		try {
 			this.executeDML(dml);
@@ -84,7 +84,7 @@ public class Database {
 		ArrayList<String> list = new ArrayList<String>();
 		String[] row;
 		try {
-			list = this.query("SELECT username, aes_decrypt(password, \"key\") as password from user");
+			list = this.query("SELECT username, aes_decrypt(password, \"key\") as password from users");
 			for (int i = 0; i < list.size(); i++) {
 				row = list.get(i).split(", ", 2);
 				if (row[0].equals(username) && row[1].equals(password)) {
@@ -100,23 +100,14 @@ public class Database {
 
 	}
 	
-	public String getPrompt() throws SQLException {
-		ArrayList<String> list = new ArrayList<String>();
+	public ArrayList<String> getPrompt() throws SQLException {
 		Statement statement = conn.createStatement();
 		ResultSet rs = statement.executeQuery("SELECT * FROM prompts");
-		int random = (int)(Math.random()*15);
-		int count = 0;
+		ArrayList<String> prompts = new ArrayList<String>();
 		while(rs.next()) {
-			String prompt = rs.getString("prompt");
-			
-			if (count == random) {
-				System.out.println(prompt);
-				return prompt;
-			}
-			count++;
+			prompts.add(rs.getString("prompt"));
 		}
-		return "null";
-		
+		return prompts;
 	}
 
 }
