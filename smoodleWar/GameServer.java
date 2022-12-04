@@ -13,6 +13,7 @@ public class GameServer extends AbstractServer {
 	private boolean running = false;
 	private Database database;
 	private JLabel score;
+	private GameData gameData;
 
 	// Constructor for initializing the server with default settings.
 	public GameServer() {
@@ -40,6 +41,10 @@ public class GameServer extends AbstractServer {
 
 	public void setStatus(JLabel status) {
 		this.status = status;
+	}
+	
+	public void setGameData(GameData gameData) {
+		this.gameData = gameData;
 	}
 
 	// When the server starts, update the GUI.
@@ -85,6 +90,7 @@ public class GameServer extends AbstractServer {
 				result = new Error("The username and password are incorrect.", "Login");
 				log.append("Client " + arg1.getId() + " failed to log in\n");
 			}
+			
 
 			// Send the result to the client.
 			try {
@@ -119,6 +125,10 @@ public class GameServer extends AbstractServer {
 		else if (arg0 instanceof Graphics) {
 			Graphics drawing = (Graphics) arg0;
 			
+		}
+		
+		else if (arg0 instanceof GameData) {
+			status.setText("The game has been won by: " + gameData.getWinner());
 		}
 	}
 
