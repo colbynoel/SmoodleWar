@@ -32,7 +32,7 @@ public class DeleteAccountControl implements ActionListener {
 		// The Submit button creates a new account.
 		else if (command == "Submit") {
 			// Get the text the user entered in the three fields.
-			DeleteAccountPanel deleteAccountPanel = (DeleteAccountPanel) container.getComponent(2);
+			DeleteAccountPanel deleteAccountPanel = (DeleteAccountPanel) container.getComponent(3);
 			String username = deleteAccountPanel.getUsername();
 			String password = deleteAccountPanel.getPassword();
 			String passwordVerify = deleteAccountPanel.getPasswordVerify();
@@ -63,12 +63,8 @@ public class DeleteAccountControl implements ActionListener {
 	// After an account is created, set the User object and display the contacts
 	// screen.
 	public void deleteAccountSuccess() {
-		DeleteAccountPanel deleteAccountPanel = (DeleteAccountPanel) container.getComponent(2);
-		ClientGUI clientGUI = (ClientGUI) SwingUtilities.getWindowAncestor(deleteAccountPanel);
-		// clientGUI.setUser(new User(createAccountPanel.getUsername(),
-		// createAccountPanel.getPassword()));
 		CardLayout cardLayout = (CardLayout) container.getLayout();
-		cardLayout.show(container, "4");
+		cardLayout.show(container, "1");
 	}
 
 	// Method that displays a message in the error label.
