@@ -100,6 +100,15 @@ public class Database {
 
 	}
 	
+	public void deleteAccount(String username, String password) {
+		try {
+			this.executeDML(String.format("delete from users where username = '%s' and AES_DECRYPT(password, 'key') = '%s'", username, password));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public ArrayList<String> getPrompt() throws SQLException {
 		Statement statement = conn.createStatement();
 		ResultSet rs = statement.executeQuery("SELECT * FROM prompts");
