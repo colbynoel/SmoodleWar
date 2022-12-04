@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.swing.JPanel;
 
@@ -13,10 +14,18 @@ public class GameControl implements ActionListener{
 	private JPanel container;
 	private GameClient client;
 	private Graphics drawing;
+	private GameData gameData;
+	private String roundWord;
+	private int incorrectGuesses;
 	
-	public GameControl(JPanel container, GameClient client) {
+	public GameControl(JPanel container, GameClient client, GameData gameData) {
 		this.container = container;
 		this.client = client;
+		this.gameData = gameData;
+	}
+	
+	public void setWordList(String[] wordlist) {
+		gameData.setWordList(wordlist);
 	}
 
 	
@@ -29,7 +38,7 @@ public class GameControl implements ActionListener{
 		if(command == "Submit") {
 			
 			//Grabs drawing panel out of the container to use it's methods 
-			DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(2);
+			DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(5);
 			
 			//Get drawing out of the drawing panel. 
 			drawing = drawingPanel.getDrawing();
@@ -43,20 +52,88 @@ public class GameControl implements ActionListener{
 				System.err.println("Couldn't send drawing");
 			}
 		}
+		
+		else if (command == "Guess") {
+			//Grabs drawing guessing out of the container to use it's methods 
+			GuessingPanel guessingPanel = (GuessingPanel) container.getComponent(6);
+			
+			//Grabs drawing panel out of the container to use it's methods 
+			DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(5);
+			
+			//Recieves entered users guess
+			String playerGuess = guessingPanel.getGuess();
+			
+			if (playerGuess.equals(roundWord)) {
+				
+				//Let's Player Know their guess was correct
+				
+				//Get the current score from game data and increment it
+				int score = gameData.getCurrentScore();
+				score++;
+				
+				//Update gameDatas current score
+				gameData.setCurrentScore(score);
+				
+				//Update the visual "Player Score" in drawingPanel
+				drawingPanel.setScore(score);
+				
+				//If current score is 3, end the game
+				if (gameData.getCurrentScore() == 3)
+				{
+					try {
+						endGame();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				else 
+				{
+					incorrectGuesses = 0;
+					endRound("Your Guess was Correct");
+				}
+			}
+			else {
+				incorrectGuesses++;
+				endRound("Your Guess Was Incorrect");
+			}
+		}
+		else if (command == "Next Drawing") {
+			CardLayout cardLayout = (CardLayout) container.getLayout();
+			cardLayout.show(container, "5");
+		}
 	}
 
-	public void recieveRandomPrompts(String[] wordList) {
-		// TODO Auto-generated method stub
+	public void recieveRandomPrompts() {
+		String[] wordList = gameData.getWordList();
+		
+		Random r = new Random();
+		int randomWordIndex = r.nextInt(wordList.length);
+		
+		//Grabs drawing panel out of the container to use it's methods 
+		DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(6);
+		
+		//Set random word to be later checked during guessing round
+		roundWord = wordList[randomWordIndex];
+		
+		//Sets prompt word to be the randomly selected word
+		drawingPanel.setPromptWord(roundWord);
 		
 	}
 
-	public void endGame() {
-		// TODO Auto-generated method stub
-		
+	//If user has guessed correctly 3 times, send gameData object to server to end game
+	public void endGame() throws IOException {
+		client.sendToServer(gameData);
 	}
 
-	public void endRound() {
-		// TODO Auto-generated method stub
+	public void endRound(String tfCorrect) {
+		//Grabs drawing guessing out of the container to use it's methods 
+		GuessingPanel guessingPanel = (GuessingPanel) container.getComponent(6);
+		
+		guessingPanel.setTFCorrect(tfCorrect);
+		
+		//Get a new random word
+		recieveRandomPrompts();
 		
 	}
 

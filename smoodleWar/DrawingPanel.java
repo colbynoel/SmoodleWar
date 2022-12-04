@@ -15,6 +15,7 @@ public class DrawingPanel extends JPanel {
 	private DrawingField drawingField;
 	private JLabel prompt;
 	private JLabel role;
+	private JLabel score;
 	
 	// Pull the graphics object from the drawingField Panel.
 	public Graphics getDrawing() {
@@ -27,6 +28,15 @@ public class DrawingPanel extends JPanel {
 
 	public void setRole(JLabel role) {
 		this.role = role;
+	}
+	
+	public void setPromptWord(String promptWord)
+	{
+		prompt.setText(promptWord);
+	}
+	
+	public void setScore(int scoreCT) {
+		score.setText(Integer.toString(scoreCT));
 	}
 	
 	public DrawingPanel(GameControl drawingControl) {
