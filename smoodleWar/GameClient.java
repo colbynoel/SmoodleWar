@@ -1,6 +1,7 @@
 package smoodleWar;
 
 import java.awt.Graphics;
+import java.io.IOException;
 
 import javax.swing.*;
 
@@ -65,15 +66,7 @@ public class GameClient extends AbstractClient {
 			// Game Turn Related Response //
 			// ------------------------------------------------------//
 
-			// If a round is successfully over activate the roundover function
-			else if (serverResponse.equals("RoundOver")) {
-				gameControl.endRound();
-			}
-
-			// If the game is successfully over run the GameOverFunction
-			else if (serverResponse.equals("GameOver")) {
-				gameControl.endGame();
-			}
+			
 			
 		}
 
@@ -83,7 +76,7 @@ public class GameClient extends AbstractClient {
 		else if (arg0 instanceof String[]) {
 			String[] wordList = (String[]) arg0;
 
-			gameControl.recieveRandomPrompts(wordList);
+			gameControl.setWordList(wordList);
 		}
 		
 		//Recieves Graphics object from server and sends to client to update to Guessing round if not 

@@ -1,6 +1,7 @@
 package smoodleWar;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -13,14 +14,22 @@ public class DrawingField extends JPanel implements MouseListener, MouseMotionLi
 	public DrawingField() {
 		addMouseListener(this);
 		addMouseMotionListener(this);
+		setPreferredSize(getPreferredSize());
 	}
 	
-	
+	@Override
+	public Dimension getPreferredSize(){
+		Dimension size = super.getPreferredSize();
+		size.width = 500;
+		size.height = 500;
+		return size;
+		
+	}
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		g.drawString("Blah blah!", 20, 20);
+		//g.drawString("Blah blah!", 20, 20);
 	}
 
 	@Override

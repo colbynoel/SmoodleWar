@@ -129,7 +129,7 @@ public class GameServer extends AbstractServer {
 		}
 		
 		else if (arg0 instanceof GameData) {
-			status.setText("The game has been won by: " + gameData.getWinner());
+			//status.setText("The game has been won by: " + gameData.getWinner());
 		}
 	}
 

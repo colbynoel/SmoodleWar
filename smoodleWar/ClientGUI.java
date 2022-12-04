@@ -18,6 +18,9 @@ public class ClientGUI extends JFrame {
 			e.printStackTrace();
 		}
 
+		//Set up game data 
+		GameData gameData = new GameData();
+		
 		// Set the title and default close operation.
 		this.setTitle("SmoodleWar!!");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,7 +35,7 @@ public class ClientGUI extends JFrame {
 		LoginControl lc = new LoginControl(container, client);
 		CreateAccountControl cac = new CreateAccountControl(container, client);
 		DeleteAccountControl dac = new DeleteAccountControl(container, client);
-		GameControl gc = new GameControl(container, client);
+		GameControl gc = new GameControl(container, client, gameData);
 		LobbyControl lobc = new LobbyControl(container, client);
 
 		// Set the client info
@@ -75,7 +78,7 @@ public class ClientGUI extends JFrame {
 		this.add(container);
 
 		// Show the JFrame.
-		this.setSize(550, 350);
+		this.setSize(750, 650);
 		this.setVisible(true);
 	}
 
