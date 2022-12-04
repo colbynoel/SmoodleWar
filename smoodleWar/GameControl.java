@@ -37,7 +37,6 @@ public class GameControl implements ActionListener{
 			try {
 				client.sendToServer(drawing);
 			}
-			
 			catch (IOException ex) {
 				ex.printStackTrace();
 				System.err.println("Couldn't send drawing");
@@ -60,6 +59,11 @@ public class GameControl implements ActionListener{
 		
 	}
 
+	public void switchToDrawingView() {
+		CardLayout cardLayout = (CardLayout) container.getLayout();
+		cardLayout.show(container, "5");
+	}
+	
 	public void switchGameScreen(Graphics opponentDrawing) {
 		//Server always sends submitted drawing objects (including clients), game will only update to guessing screen if opponent drawing is 
 		//recieved.
