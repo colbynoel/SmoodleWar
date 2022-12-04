@@ -25,3 +25,7 @@
 /ServerGUI$EventHandler.class
 /ServerGUI.class
 /User.class
+/DrawingData.class
+/DrawingField.class
+/DrawingPanel.class
+/GuessingPanel.class
