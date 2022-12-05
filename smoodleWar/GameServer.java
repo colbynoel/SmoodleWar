@@ -113,6 +113,7 @@ public class GameServer extends AbstractServer {
 			}
 		}else if (arg0 instanceof Graphics) {
 			Graphics drawing = (Graphics) arg0;
+			log.append("Server Recieved graphics object from client " + arg1.getId());
 			super.sendToAllClients(drawing);
 			
 		}else if (arg0 instanceof DeleteAccountData) {

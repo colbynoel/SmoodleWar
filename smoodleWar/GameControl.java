@@ -35,7 +35,7 @@ public class GameControl implements ActionListener{
 		
 		// If submit is pressed, get our drawing from the drawingPanel
 		// Then send to server.
-		if(command == "Submit") {
+		if(command == "submit drawing") {
 			
 			//Grabs drawing panel out of the container to use it's methods 
 			DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(5);
@@ -51,7 +51,9 @@ public class GameControl implements ActionListener{
 				System.err.println("Couldn't send drawing");
 			}
 		}
-		
+		else if (command == "clear drawing") {
+			// Let's clear the drawing field to reset on player request
+		}
 		else if (command == "Guess") {
 			//Grabs drawing guessing out of the container to use it's methods 
 			GuessingPanel guessingPanel = (GuessingPanel) container.getComponent(6);

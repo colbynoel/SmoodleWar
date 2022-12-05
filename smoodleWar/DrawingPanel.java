@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.image.BufferedImage;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -68,8 +69,10 @@ public class DrawingPanel extends JPanel {
 		middlePanel.add(drawingField);
 
 		JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 10, 10));
-		JButton button1 = new JButton("Sussy");
-		JButton button2 = new JButton("Bussy");
+		JButton button1 = new JButton("submit drawing");
+		JButton button2 = new JButton("clear screen");
+		button1.addActionListener(drawingControl);
+		button2.addActionListener(drawingControl);
 		buttonPanel.add(button1);
 		buttonPanel.add(button2);
 		

@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
@@ -25,6 +26,7 @@ public class DrawingField extends JPanel implements MouseListener, MouseMotionLi
 		return size;
 		
 	}
+	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
