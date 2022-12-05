@@ -3,6 +3,8 @@ package smoodleWar;
 import java.awt.*;
 import javax.swing.*;
 import java.io.IOException;
+import java.sql.SQLException;
+
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 
@@ -109,12 +111,19 @@ public class GameServer extends AbstractServer {
 			} catch (IOException e) {
 				return;
 			}
-		}
-		
-		else if (arg0 instanceof Graphics) {
+		}else if (arg0 instanceof Graphics) {
 			Graphics drawing = (Graphics) arg0;
 			super.sendToAllClients(drawing);
 			
+		}else if (arg0 instanceof DeleteAccountData) {
+			DeleteAccountData data = (DeleteAccountData) arg0;
+			database.deleteAccount(data.getUsername(), data.getPassword());
+			Object result = "AccountDeletionSuccesful";
+			try {
+				arg1.sendToClient(result);
+			} catch (IOException e) {
+				return;
+			}
 		}
 	}
 

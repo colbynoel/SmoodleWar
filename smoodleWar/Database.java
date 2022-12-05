@@ -44,6 +44,7 @@ public class Database {
 		ArrayList<String> list = new ArrayList<String>();
 		String username = "";
 		String password = "";
+		String win = "";
 		// create a statement from the connection
 		Statement statement = conn.createStatement();
 
@@ -66,7 +67,7 @@ public class Database {
 		statement.executeUpdate(dml);
 	}
 
-	public boolean createNewAccount(String username, String password) {
+	public boolean createNewAccount(String username, String password){
 		String dml = String.format(
 				"insert into users(username, password, win) values ('%s', AES_ENCRYPT('%s', 'key'), %d)", username,
 				password, 0);
@@ -80,7 +81,7 @@ public class Database {
 		}
 	}
 
-	public boolean verifyAccount(String username, String password) {
+	public boolean verifyAccount(String username, String password){
 		ArrayList<String> list = new ArrayList<String>();
 		String[] row;
 		try {
@@ -100,12 +101,14 @@ public class Database {
 
 	}
 	
-	public void deleteAccount(String username, String password) {
+	public boolean deleteAccount(String username, String password){
 		try {
 			this.executeDML(String.format("delete from users where username = '%s' and AES_DECRYPT(password, 'key') = '%s'", username, password));
+			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 	}
 	
