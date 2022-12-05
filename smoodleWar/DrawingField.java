@@ -1,18 +1,27 @@
 package smoodleWar;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
 public class DrawingField extends JPanel implements MouseListener, MouseMotionListener {
 
+	//private BufferedImage image;
+	private ArrayList<Point> point;
+	
 	public DrawingField() {
+		//image = new BufferedImage(500,500.BufferedImage.TYPE_INT_);
+		point = new ArrayList<Point>();
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		setPreferredSize(getPreferredSize());
@@ -30,40 +39,40 @@ public class DrawingField extends JPanel implements MouseListener, MouseMotionLi
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		Graphics2D graphics = (Graphics2D) g;
+		
+		graphics.setColor(Color.black);
 
+		for (int i = 1; i < point.size(); i++) {
+			int startx = (int) point.get(i - 1).getX();
+			int starty = (int) point.get(i - 1).getY();
+			int endx = (int) point.get(i).getX();
+			int endy = (int) point.get(i).getY();
+
+			graphics.setStroke(new BasicStroke(5));
+			graphics.drawLine(startx, starty, endx, endy);
+		}
 		//g.drawString("Blah blah!", 20, 20);
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		Graphics g = this.getGraphics();
-		g.setColor(Color.black);
+		Point coord = new Point();
+		coord.setLocation(e.getX(), e.getY());
 		
-		// get X and y position
-		int x, y;
-		x = e.getX();
-		y = e.getY();
-		
-		// draw a Oval at the point
-		// where mouse is moved
-		g.fillOval(x, y, 5, 5);
+		point.add(coord);
+		repaint();
 
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		Graphics g = this.getGraphics();
-		g.setColor(Color.black);
 		
-		// get X and y position
-		int x, y;
-		x = e.getX();
-		y = e.getY();
-		
-		// draw a Oval at the point
-		// where mouse is moved
-		g.fillOval(x, y, 5, 5);
-
+//		Point coord = new Point();
+//		coord.setLocation(e.getX(), e.getY());
+//		
+//		point.add(coord);
+//		repaint();
 	}
 
 	// NOT NEEDED
