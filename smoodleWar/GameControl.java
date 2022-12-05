@@ -101,6 +101,15 @@ public class GameControl implements ActionListener{
 			CardLayout cardLayout = (CardLayout) container.getLayout();
 			cardLayout.show(container, "5");
 		}
+		else if (command == "End Game") {
+			//Reset Game Data
+			gameData.setCurrentScore(0);
+			gameData.setRoomCode("");
+			
+			//Show lobby screen
+			CardLayout cardLayout = (CardLayout) container.getLayout();
+			cardLayout.show(container, "7");
+		}
 	}
 
 	public void recieveRandomPrompts() {
