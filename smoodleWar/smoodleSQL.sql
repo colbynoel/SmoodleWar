@@ -22,7 +22,7 @@ add constraint users_username_pk primary key (username);
 alter table prompts
 add constraint prompts_prompt_pk primary key (prompt);
 
-
+insert into prompts values ("mark smith");
 insert into prompts values ("chicken");
 insert into prompts values ("ball");
 insert into prompts values ("dog");
