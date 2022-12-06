@@ -47,11 +47,14 @@ public class GameClient extends AbstractClient {
 		// of the project
 		if (arg0 instanceof String) {
 			// Stringify the response
-			String serverResponse = (String) arg0;
+			String serverMessage = (String) arg0;
+			// serverResponse[0] = actual response
+			// serverResponse[1] = drawer/guesser
+			String[] serverResponse = serverMessage.split(",");
 
 			// Successful Login
-			if (serverResponse.equals("LoginSuccessful")) {
-				user = loginControl.loginSuccess();
+			if (serverResponse[0].equals("LoginSuccessful")) {
+				user = loginControl.loginSuccess(serverResponse[1]);
 			}
 
 			// Create Account Verification
