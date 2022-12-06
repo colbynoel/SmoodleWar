@@ -25,12 +25,22 @@ public class LobbyPanel extends JPanel {
 	private JPasswordField passwordField;
 	private JPasswordField passwordVerifyField;
 	private JLabel errorLabel;
+	
+	private String role;
 
 	
 
 	// Setter for the error text.
 	public void setError(String error) {
 		errorLabel.setText(error);
+	}
+	
+	public String getRole() {
+		return role;
+	}
+	
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	// Constructor for the create account panel.
