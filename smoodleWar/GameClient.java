@@ -1,7 +1,9 @@
 package smoodleWar;
 
 import java.awt.Graphics;
+import java.awt.Point;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -80,9 +82,9 @@ public class GameClient extends AbstractClient {
 		}
 		
 		//Recieves Graphics object from server and sends to client to update to Guessing round if not 
-		else if (arg0 instanceof Graphics)
+		else if (arg0 instanceof ArrayList<?>)
 		{
-			Graphics opponentDrawing = (Graphics)arg0;
+			ArrayList<Point> opponentDrawing = (ArrayList<Point>)arg0;
 			gameControl.switchGameScreen(opponentDrawing);
 		}
 

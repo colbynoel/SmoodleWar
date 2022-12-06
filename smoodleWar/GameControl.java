@@ -155,16 +155,16 @@ public class GameControl implements ActionListener{
 		cardLayout.show(container, "5");
 	}
 	
-	public void switchGameScreen(Graphics opponentDrawing) {
+	public void switchGameScreen(ArrayList<Point> opponentDrawing) {
 		//Server always sends submitted drawing objects (including clients), game will only update to guessing screen if opponent drawing is 
 		//recieved.
-//		if (opponentDrawing != drawing)
-//		{
-//			GuessingPanel guessingPanel = (GuessingPanel) container.getComponent(2);
-//			guessingPanel.setOpponentDrawing(opponentDrawing);
-//			CardLayout cardLayout = (CardLayout) container.getLayout();
-//			cardLayout.show(container, "6");
-//		}
+		if (!opponentDrawing.equals(coordinates))
+		{
+			GuessingPanel guessingPanel = (GuessingPanel) container.getComponent(5);
+			guessingPanel.setOpponentDrawing(opponentDrawing);
+			CardLayout cardLayout = (CardLayout) container.getLayout();
+			cardLayout.show(container, "6");
+		}
 	}
 
 }
