@@ -135,6 +135,15 @@ public class GameServer extends AbstractServer {
 
 			super.sendToAllClients(coordinates);
 			
+			
+		}else if (arg0 instanceof String) {
+			String roundWord = (String) arg0;
+			
+			log.append("\nServer Recieved round word from client " + arg1.getId() + "\n");
+
+			super.sendToAllClients("RoundWord," + roundWord);
+			
+			
 		}else if (arg0 instanceof DeleteAccountData) {
 			DeleteAccountData data = (DeleteAccountData) arg0;
 			database.deleteAccount(data.getUsername(), data.getPassword());
