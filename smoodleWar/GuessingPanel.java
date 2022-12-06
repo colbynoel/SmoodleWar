@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Point;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -15,43 +17,52 @@ import javax.swing.border.Border;
 
 public class GuessingPanel extends JPanel {
 	
-	private Graphics opponentDrawing;
+	private ArrayList<Point> opponentDrawing;
+	
+	private DrawingField drawingField;
 	private JTextField guessingField;
 	private JLabel tfCorrect;
-	private DrawingField drawing;
 	
 
 	public GuessingPanel(GameControl gc) {
-		drawing = new DrawingField();
+		
+		drawingField = new DrawingField();
 		Border blackline = BorderFactory.createLineBorder(Color.black);
-		drawing.setBorder(BorderFactory.createTitledBorder(blackline, "DrawingField"));
+		drawingField.setBorder(BorderFactory.createTitledBorder(blackline, "Guess the Image!"));
+		
 
 		JPanel guessingPanel = new JPanel(new GridLayout(3, 1, 10, 10));
 		JLabel guessLabel = new JLabel("Enter Your Guess", JLabel.CENTER);
 		guessLabel.setFont(new Font("Verdana", Font.PLAIN, 35));
+		
 		guessingField = new JTextField(JLabel.CENTER);
 		JButton guessButton = new JButton("Guess");
+		
 		guessingPanel.add(guessLabel);
 		guessingPanel.add(guessingField);
 		guessingPanel.add(guessButton);
 
-		// middlePanel.setBorder(BorderFactory.createLineBorder(Color.black));
-		JPanel drawingPanel = new JPanel();
-		drawingPanel.add(drawing);
+		
+		JPanel middlePanel = new JPanel();
+		middlePanel.add(drawingField);
 
 		
 
 		this.add(guessingPanel, BorderLayout.NORTH);
-		this.add(drawingPanel, BorderLayout.CENTER);
+		this.add(middlePanel, BorderLayout.CENTER);
 
 	}
-	
-	public Graphics getGetOpponentDrawing() {
+
+	public ArrayList<Point> getOpponentDrawing(){
 		return opponentDrawing;
 	}
 
-	public void setOpponentDrawing(Graphics opponentDrawing) {
+	// Locally sets the opponent Drawing in guessingPanel
+	// then sets the drawing panel's drawingField to the specified
+	// coordinates to be redrawn.
+	public void setOpponentDrawing(ArrayList<Point> opponentDrawing) {
 		this.opponentDrawing = opponentDrawing;
+		drawingField.setDrawingCoords(opponentDrawing);
 	}
 	
 	// Getter for the text in the guess field.

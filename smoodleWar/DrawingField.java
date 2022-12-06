@@ -41,6 +41,12 @@ public class DrawingField extends JPanel implements MouseListener, MouseMotionLi
 		return coordinates;
 	}
 	
+	// This method is for displaying the drawing on the guesser's pov
+	public void setDrawingCoords(ArrayList<Point> coordinates) {
+		this.coordinates = coordinates;
+		repaint();
+	}
+	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
