@@ -53,9 +53,13 @@ public class LoginControl implements ActionListener {
 
 	// After the login is successful, set the User object and display the contacts
 	// screen.
-	public String loginSuccess() {
+	public String loginSuccess(String role) {
 		LoginPanel loginPanel = (LoginPanel) container.getComponent(1);
-
+		
+		// Set the starting role to be accessed later.
+		LobbyPanel lobbyPanel = (LobbyPanel) container.getComponent(6);
+		lobbyPanel.setRole(role);
+		
 		CardLayout cardLayout = (CardLayout) container.getLayout();
 		//cardLayout.show(container, "5");
 		cardLayout.show(container, "7");
