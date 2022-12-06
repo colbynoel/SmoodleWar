@@ -28,14 +28,16 @@ public class LobbyControl implements ActionListener{
 
 		// The Cancel button takes the user back to the initial panel.
 		if (command == "Join a Game") {
-			CardLayout cardLayout = (CardLayout) container.getLayout();
-			//temp until we figure out players
-			cardLayout.show(container, "5");
+			LobbyPanel lobbyPanel = (LobbyPanel) container.getComponent(6);
+			String role = lobbyPanel.getRole();
 			
-//			if (player == drawer)
-//				cardLayout.show(container, "5");
-//			else
-//				cardLayout.show(container, "6");
+			CardLayout cardLayout = (CardLayout) container.getLayout();
+			
+			if(role.equals("drawer")) {
+				cardLayout.show(container, "5");
+			}
+			else
+				cardLayout.show(container, "6");
 			
 		}
 
