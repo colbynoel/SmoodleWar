@@ -66,23 +66,34 @@ public class GameClient extends AbstractClient {
 			else if (serverResponse.equals("AccountDeletionSuccesful")) {
 				deleteAccountControl.deleteAccountSuccess();
 			}
-
-			// ------------------------------------------------------//
-			// Game Turn Related Response //
-			// ------------------------------------------------------//
-
-			
+			else if (serverResponse[0].equals("RoundWord")) {
+				gameControl.recieveDrawerRoundWord(serverResponse[1]);
+			}
+			else if (serverMessage.equals("GetPrompt")) {
+				gameControl.recieveRandomPrompts();	
+			}
+			else if (serverResponse[0].equals("WordList")) {
+				
+				String[] wordList = new String[serverResponse.length - 1];
+				
+				for(int i = 0; i < wordList.length; i++) {
+		        	wordList[i] = serverResponse[i+1];
+		        }
+				
+				gameControl.setWordList(wordList);
+				
+			}
 			
 		}
 
 		// For word prompts, the server should return an array of strings. This response
 		// is built
 		// specifically to recieve that array.
-		else if (arg0 instanceof String[]) {
-			String[] wordList = (String[]) arg0;
-
-			gameControl.setWordList(wordList);
-		}
+//		else if (arg0 instanceof String[]) {
+//			String[] wordList = (String[]) arg0;
+//
+//			gameControl.setWordList(wordList);
+//		}
 		
 		//Recieves Graphics object from server and sends to client to update to Guessing round if not 
 		else if (arg0 instanceof ArrayList<?>)

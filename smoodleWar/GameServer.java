@@ -93,6 +93,19 @@ public class GameServer extends AbstractServer {
 				isDrawer = true;
 				result = result + "," + "drawer" + "," + data.getUsername();
 				
+				try {
+					arg1.sendToClient(result);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				try {
+					arg1.sendToClient("GetPrompt");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			else
 				result = result + "," + "guesser" + "," + data.getUsername();
@@ -135,15 +148,6 @@ public class GameServer extends AbstractServer {
 
 			super.sendToAllClients(coordinates);
 			
-			
-		}else if (arg0 instanceof String) {
-			String roundWord = (String) arg0;
-			
-			log.append("\nServer Recieved round word from client " + arg1.getId() + "\n");
-
-			super.sendToAllClients("RoundWord," + roundWord);
-			
-			
 		}else if (arg0 instanceof DeleteAccountData) {
 			DeleteAccountData data = (DeleteAccountData) arg0;
 			database.deleteAccount(data.getUsername(), data.getPassword());
@@ -154,8 +158,49 @@ public class GameServer extends AbstractServer {
 				return;
 			}
 		}
-	}
+		else if (arg0 instanceof String) {
+			String message = (String)arg0;
+			
+			String[] clientResponse = message.split(",");
+			
+			if (message.equals("getWordList")) {
+				ArrayList<String> promptData = new ArrayList<String>();
 
+		        try {
+		            promptData = database.getPrompt();
+		        } catch (SQLException e) {
+		            // TODO Auto-generated catch block
+		            e.printStackTrace();
+		        }
+		        ArrayList<String> prompts = promptData;
+		        
+		        String clientPromptList = "WordList,";
+		        
+		        for(int i = 0; i < prompts.size(); i++) {
+		        	clientPromptList += prompts.get(i) + ","; 
+		        }
+		        
+		        log.append("Server generated list of prompts\n");
+		        
+		        try {
+					arg1.sendToClient(clientPromptList);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else if (clientResponse[0].equals("RoundWord")) {
+				
+				try {
+					arg1.sendToClient("RoundWord," + clientResponse[1]);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		}
+	}
 	// Method that handles listening exceptions by displaying exception information.
 	public void listeningException(Throwable exception) {
 		running = false;

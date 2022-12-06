@@ -47,6 +47,7 @@ public class GameControl implements ActionListener{
 			coordinates = drawingPanel.getDrawing();
 			
 			try {
+				client.sendToServer(roundWord);
 				client.sendToServer(coordinates);
 			}
 			catch (IOException ex) {
@@ -118,6 +119,13 @@ public class GameControl implements ActionListener{
 	}
 
 	public void recieveRandomPrompts() {
+		try {
+			client.sendToServer("getWordList");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		String[] wordList = gameData.getWordList();
 		
 		Random r = new Random();
@@ -129,8 +137,19 @@ public class GameControl implements ActionListener{
 		//Set random word to be later checked during guessing round
 		roundWord = wordList[randomWordIndex];
 		
+		//Set roundword in server
+		try {
+			client.sendToServer("RoundWord," + roundWord);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		//Sets prompt word to be the randomly selected word
 		drawingPanel.setPromptWord(roundWord);
+	}
+	
+	public void setWordList() {
 		
 	}
 
@@ -149,6 +168,10 @@ public class GameControl implements ActionListener{
 		recieveRandomPrompts();
 		
 	}
+	
+	public void recieveDrawerRoundWord(String drawerRoundWord) {
+		roundWord = drawerRoundWord;
+	}
 
 	public void switchToDrawingView() {
 		CardLayout cardLayout = (CardLayout) container.getLayout();
@@ -157,14 +180,14 @@ public class GameControl implements ActionListener{
 	
 	public void switchGameScreen(ArrayList<Point> opponentDrawing) {
 		//Server always sends submitted drawing objects (including clients), game will only update to guessing screen if opponent drawing is 
-		//recieved.
-		if (!opponentDrawing.equals(coordinates))
-		{
-			GuessingPanel guessingPanel = (GuessingPanel) container.getComponent(5);
-			guessingPanel.setOpponentDrawing(opponentDrawing);
-			CardLayout cardLayout = (CardLayout) container.getLayout();
-			cardLayout.show(container, "6");
-		}
+        //recieved.
+        if (!opponentDrawing.equals(coordinates))
+        {
+            GuessingPanel guessingPanel = (GuessingPanel) container.getComponent(5);
+            guessingPanel.setOpponentDrawing(opponentDrawing);
+            CardLayout cardLayout = (CardLayout) container.getLayout();
+            cardLayout.show(container, "6");
+        }
 	}
 
 }
