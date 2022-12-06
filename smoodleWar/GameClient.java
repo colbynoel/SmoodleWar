@@ -54,7 +54,7 @@ public class GameClient extends AbstractClient {
 
 			// Successful Login
 			if (serverResponse[0].equals("LoginSuccessful")) {
-				user = loginControl.loginSuccess(serverResponse[1]);
+				user = loginControl.loginSuccess(serverResponse[1], serverResponse[2]);
 			}
 
 			// Create Account Verification

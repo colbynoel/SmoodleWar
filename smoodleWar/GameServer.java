@@ -91,10 +91,11 @@ public class GameServer extends AbstractServer {
 			// here.
 			if(!isDrawer) {
 				isDrawer = true;
-				result = result + "," + "drawer";
+				result = result + "," + "drawer" + "," + data.getUsername();
+				
 			}
 			else
-				result = result + "," + "guesser";
+				result = result + "," + "guesser" + "," + data.getUsername();
 			
 			// Send the result to the client.
 			try {

@@ -25,10 +25,16 @@ public class LobbyPanel extends JPanel {
 	private JPasswordField passwordField;
 	private JPasswordField passwordVerifyField;
 	private JLabel errorLabel;
-	
+	private String username;
 	private String role;
 
+	public String getUsername() {
+		return username;
+	}
 	
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 	// Setter for the error text.
 	public void setError(String error) {
@@ -57,14 +63,14 @@ public class LobbyPanel extends JPanel {
 		labelPanel.add(instructionLabel2);
 
 		// Create a panel for the account information form.
-//		JPanel accountPanel = new JPanel(new GridLayout(3, 2, 5, 5));
-//		JLabel usernameLabel = new JLabel("Username:", JLabel.RIGHT);
+		JPanel accountPanel = new JPanel(new GridLayout(3, 2, 5, 5));
+		JLabel usernameLabel = new JLabel("Welcome" + username, JLabel.RIGHT);
 //		usernameField = new JTextField(10);
 //		JLabel passwordLabel = new JLabel("Password:", JLabel.RIGHT);
 //		passwordField = new JPasswordField(10);
 //		JLabel passwordVerifyLabel = new JLabel("Verify Password:", JLabel.RIGHT);
 //		passwordVerifyField = new JPasswordField(10);
-//		accountPanel.add(usernameLabel);
+		accountPanel.add(usernameLabel);
 //		accountPanel.add(usernameField);
 //		accountPanel.add(passwordLabel);
 //		accountPanel.add(passwordField);
@@ -83,7 +89,7 @@ public class LobbyPanel extends JPanel {
 		// Arrange the three panels in a grid.
 		JPanel grid = new JPanel(new GridLayout(3, 1, 0, 10));
 		grid.add(labelPanel);
-		//grid.add(accountPanel);
+		grid.add(accountPanel);
 		grid.add(buttonPanel);
 		this.add(grid);
 	}
