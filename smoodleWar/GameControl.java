@@ -59,10 +59,10 @@ public class GameControl implements ActionListener{
 		}
 		else if (command == "Guess") {
 			//Grabs drawing guessing out of the container to use it's methods 
-			GuessingPanel guessingPanel = (GuessingPanel) container.getComponent(6);
+			GuessingPanel guessingPanel = (GuessingPanel) container.getComponent(5);
 			
 			//Grabs drawing panel out of the container to use it's methods 
-			DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(5);
+			DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(4);
 			
 			//Receives entered users guess
 			String playerGuess = guessingPanel.getGuess();

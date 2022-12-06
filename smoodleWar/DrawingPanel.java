@@ -62,7 +62,7 @@ public class DrawingPanel extends JPanel {
 		drawingField.setBorder(BorderFactory.createTitledBorder(blackline, "DrawingField"));
 
 		JPanel topPanel = new JPanel(new GridLayout(1, 1, 10, 10));
-		JLabel prompt = new JLabel("Fish", JLabel.CENTER);
+		JLabel prompt = new JLabel("", JLabel.CENTER);
 		prompt.setFont(new Font("Verdana", Font.PLAIN, 35));
 		topPanel.add(prompt);
 
