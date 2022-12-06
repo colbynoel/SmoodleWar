@@ -10,6 +10,8 @@ import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
+import smoodleWar.Database;
+
 public class DatabaseTest {
 	Database db;
 	String[] users = {"cnoel", "bcavin", "dvarnell", "ianFields", "landon"};
