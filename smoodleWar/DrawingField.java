@@ -17,11 +17,12 @@ import javax.swing.JPanel;
 public class DrawingField extends JPanel implements MouseListener, MouseMotionListener {
 
 	//private BufferedImage image;
-	private ArrayList<Point> point;
+	private ArrayList<Point> coordinates;
 	
 	public DrawingField() {
 		//image = new BufferedImage(500,500.BufferedImage.TYPE_INT_);
-		point = new ArrayList<Point>();
+		coordinates = new ArrayList<Point>();
+		setBackground(Color.white);
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		setPreferredSize(getPreferredSize());
@@ -36,6 +37,10 @@ public class DrawingField extends JPanel implements MouseListener, MouseMotionLi
 		
 	}
 	
+	public ArrayList<Point> getDrawingCoords(){
+		return coordinates;
+	}
+	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -43,11 +48,13 @@ public class DrawingField extends JPanel implements MouseListener, MouseMotionLi
 		
 		graphics.setColor(Color.black);
 
-		for (int i = 1; i < point.size(); i++) {
-			int startx = (int) point.get(i - 1).getX();
-			int starty = (int) point.get(i - 1).getY();
-			int endx = (int) point.get(i).getX();
-			int endy = (int) point.get(i).getY();
+		// Loops through the ArrayList of Points and connects them on each re-draw
+		for (int i = 1; i < coordinates.size(); i++) {
+			
+			int startx = (int) coordinates.get(i - 1).getX();
+			int starty = (int) coordinates.get(i - 1).getY();
+			int endx = (int) coordinates.get(i).getX();
+			int endy = (int) coordinates.get(i).getY();
 
 			graphics.setStroke(new BasicStroke(5));
 			graphics.drawLine(startx, starty, endx, endy);
@@ -60,7 +67,7 @@ public class DrawingField extends JPanel implements MouseListener, MouseMotionLi
 		Point coord = new Point();
 		coord.setLocation(e.getX(), e.getY());
 		
-		point.add(coord);
+		coordinates.add(coord);
 		repaint();
 
 	}

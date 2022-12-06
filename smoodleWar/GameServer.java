@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
@@ -111,10 +112,10 @@ public class GameServer extends AbstractServer {
 			} catch (IOException e) {
 				return;
 			}
-		}else if (arg0 instanceof Graphics) {
-			Graphics drawing = (Graphics) arg0;
-			log.append("Server Recieved graphics object from client " + arg1.getId());
-			super.sendToAllClients(drawing);
+		}else if (arg0 instanceof ArrayList<?>) {
+			ArrayList<Point> coordinates = (ArrayList<Point>) arg0;
+			log.append("Server Recieved Drawing Coords List from client " + arg1.getId());
+			super.sendToAllClients(coordinates);
 			
 		}else if (arg0 instanceof DeleteAccountData) {
 			DeleteAccountData data = (DeleteAccountData) arg0;

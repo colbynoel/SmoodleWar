@@ -2,10 +2,12 @@ package smoodleWar;
 
 import java.awt.CardLayout;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -14,7 +16,7 @@ public class GameControl implements ActionListener{
 	
 	private JPanel container;
 	private GameClient client;
-	private Graphics drawing;
+	private ArrayList<Point> coordinates;
 	private GameData gameData;
 	private String roundWord;
 	private int incorrectGuesses;
@@ -42,10 +44,10 @@ public class GameControl implements ActionListener{
 			DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(5);
 			
 			//Get drawing out of the drawing panel. 
-			drawing = drawingPanel.getDrawing();
+			coordinates = drawingPanel.getDrawing();
 			
 			try {
-				client.sendToServer(drawing);
+				client.sendToServer(coordinates);
 			}
 			catch (IOException ex) {
 				ex.printStackTrace();
@@ -156,13 +158,13 @@ public class GameControl implements ActionListener{
 	public void switchGameScreen(Graphics opponentDrawing) {
 		//Server always sends submitted drawing objects (including clients), game will only update to guessing screen if opponent drawing is 
 		//recieved.
-		if (opponentDrawing != drawing)
-		{
-			GuessingPanel guessingPanel = (GuessingPanel) container.getComponent(2);
-			guessingPanel.setOpponentDrawing(opponentDrawing);
-			CardLayout cardLayout = (CardLayout) container.getLayout();
-			cardLayout.show(container, "6");
-		}
+//		if (opponentDrawing != drawing)
+//		{
+//			GuessingPanel guessingPanel = (GuessingPanel) container.getComponent(2);
+//			guessingPanel.setOpponentDrawing(opponentDrawing);
+//			CardLayout cardLayout = (CardLayout) container.getLayout();
+//			cardLayout.show(container, "6");
+//		}
 	}
 
 }

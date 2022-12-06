@@ -5,7 +5,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -23,8 +25,8 @@ public class DrawingPanel extends JPanel {
 	private JLabel score;
 	
 	// Pull the graphics object from the drawingField Panel.
-	public Graphics getDrawing() {
-		return drawingField.getGraphics();
+	public ArrayList<Point> getDrawing() {
+		return drawingField.getDrawingCoords();
 	}
 
 	public JLabel getRole() {
