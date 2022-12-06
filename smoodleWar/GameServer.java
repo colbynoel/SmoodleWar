@@ -148,6 +148,7 @@ public class GameServer extends AbstractServer {
 			DeleteAccountData data = (DeleteAccountData) arg0;
 			database.deleteAccount(data.getUsername(), data.getPassword());
 			Object result = "AccountDeletionSuccesful";
+			log.append("Client " + arg1.getId() + " deleted account called " + data.getUsername() + "\n");
 			try {
 				arg1.sendToClient(result);
 			} catch (IOException e) {
