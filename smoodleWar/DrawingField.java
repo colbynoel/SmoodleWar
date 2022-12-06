@@ -30,9 +30,14 @@ public class DrawingField extends JPanel implements MouseListener, MouseMotionLi
 	
 	@Override
 	public Dimension getPreferredSize(){
-		Dimension size = super.getPreferredSize();
-		size.width = 500;
-		size.height = 500;
+//		Dimension size = super.getPreferredSize();
+//		size.width = 500;
+//		size.height = 500;
+//		return size;
+		
+		Dimension size = new Dimension();
+		size.setSize(500, 500);
+		
 		return size;
 		
 	}

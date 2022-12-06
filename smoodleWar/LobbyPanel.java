@@ -34,6 +34,7 @@ public class LobbyPanel extends JPanel {
 	
 	public void setUsername(String username) {
 		this.username = username;
+		
 	}
 
 	// Setter for the error text.
@@ -52,11 +53,15 @@ public class LobbyPanel extends JPanel {
 	// Constructor for the create account panel.
 	public LobbyPanel(LobbyControl lobc) {
 
+		
 		// Create a panel for the labels at the top of the GUI.
 		JPanel labelPanel = new JPanel(new GridLayout(3, 1, 5, 5));
 		errorLabel = new JLabel("", JLabel.CENTER);
 		errorLabel.setForeground(Color.RED);
 		JLabel instructionLabel = new JLabel("Welcome to Smoodle War!", JLabel.CENTER);
+		
+		
+		//JLabel instructionLabel = new JLabel(username, JLabel.CENTER);
 		JLabel instructionLabel2 = new JLabel("Please choose to join a game or leave in shame and dishonor.", JLabel.CENTER);
 		labelPanel.add(errorLabel);
 		labelPanel.add(instructionLabel);
@@ -64,18 +69,10 @@ public class LobbyPanel extends JPanel {
 
 		// Create a panel for the account information form.
 		JPanel accountPanel = new JPanel(new GridLayout(3, 2, 5, 5));
-		JLabel usernameLabel = new JLabel("Welcome" + username, JLabel.RIGHT);
-//		usernameField = new JTextField(10);
-//		JLabel passwordLabel = new JLabel("Password:", JLabel.RIGHT);
-//		passwordField = new JPasswordField(10);
-//		JLabel passwordVerifyLabel = new JLabel("Verify Password:", JLabel.RIGHT);
-//		passwordVerifyField = new JPasswordField(10);
+		JLabel usernameLabel = new JLabel("Welcome " + this.username, JLabel.CENTER);
+//		
 		accountPanel.add(usernameLabel);
-//		accountPanel.add(usernameField);
-//		accountPanel.add(passwordLabel);
-//		accountPanel.add(passwordField);
-//		accountPanel.add(passwordVerifyLabel);
-//		accountPanel.add(passwordVerifyField);
+//		
 
 		// Create a panel for the buttons.
 		JPanel buttonPanel = new JPanel();
