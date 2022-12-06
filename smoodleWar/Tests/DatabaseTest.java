@@ -1,4 +1,4 @@
-package smoodleWar.Tests;
+package smoodleWar;
 
 import static org.junit.Assert.*;
 
@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
-
-import smoodleWar.Database;
 
 public class DatabaseTest {
 	Database db;
