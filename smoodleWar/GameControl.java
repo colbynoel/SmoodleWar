@@ -41,7 +41,7 @@ public class GameControl implements ActionListener{
 		if(command == "submit drawing") {
 			
 			//Grabs drawing panel out of the container to use it's methods 
-			DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(5);
+			DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(4);
 			
 			//Get drawing out of the drawing panel. 
 			coordinates = drawingPanel.getDrawing();

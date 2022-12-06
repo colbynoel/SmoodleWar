@@ -112,9 +112,13 @@ public class GameServer extends AbstractServer {
 			} catch (IOException e) {
 				return;
 			}
+			
 		}else if (arg0 instanceof ArrayList<?>) {
 			ArrayList<Point> coordinates = (ArrayList<Point>) arg0;
-			log.append("Server Recieved Drawing Coords List from client " + arg1.getId());
+			if (coordinates.equals(null)) {
+				log.append("Arraylist is null.\n");
+			}
+			log.append("\nServer Recieved Drawing Coords List from client " + arg1.getId() + "\n");
 			super.sendToAllClients(coordinates);
 			
 		}else if (arg0 instanceof DeleteAccountData) {
