@@ -41,7 +41,6 @@ public class GameClient extends AbstractClient {
 
 	@Override
 	protected void handleMessageFromServer(Object arg0) {
-
 		// Check returned string to determine what actions need to be taken based on the
 		// status
 		// of the project
@@ -51,7 +50,6 @@ public class GameClient extends AbstractClient {
 			// serverResponse[0] = actual response
 			// serverResponse[1] = drawer/guesser
 			String[] serverResponse = serverMessage.split(",");
-
 			// Successful Login
 			if (serverResponse[0].equals("LoginSuccessful")) {
 				user = loginControl.loginSuccess(serverResponse[1], serverResponse[2]);
@@ -66,22 +64,8 @@ public class GameClient extends AbstractClient {
 			else if (serverMessage.equals("AccountDeletionSuccesful")) {
 				deleteAccountControl.deleteAccountSuccess();
 			}
-			else if (serverResponse[0].equals("RoundWord")) {
-				gameControl.recieveDrawerRoundWord(serverResponse[1]);
-			}
-			else if (serverMessage.equals("GetPrompt")) {
-				gameControl.recieveRandomPrompts();	
-			}
-			else if (serverResponse[0].equals("WordList")) {
-				
-				String[] wordList = new String[serverResponse.length - 1];
-				
-				for(int i = 0; i < wordList.length; i++) {
-		        	wordList[i] = serverResponse[i+1];
-		        }
-				
-				gameControl.setWordList(wordList);
-				
+			else if (serverResponse[0].equals("Prompt")) {
+				gameControl.recieveRandomPrompt(serverResponse[1]);
 			}
 			
 		}

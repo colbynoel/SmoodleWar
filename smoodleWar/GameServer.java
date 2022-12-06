@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
@@ -73,6 +74,7 @@ public class GameServer extends AbstractServer {
 
 	// When a message is received from a client, handle it.
 	public void handleMessageFromClient(Object arg0, ConnectionToClient arg1) {
+		System.out.println(arg0.getClass());
 		// If we received LoginData, verify the account information.
 		if (arg0 instanceof LoginData) {
 			// Check the username and password with the database.
@@ -100,12 +102,6 @@ public class GameServer extends AbstractServer {
 					e.printStackTrace();
 				}
 				
-				try {
-					arg1.sendToClient("GetPrompt");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			}
 			else
 				result = result + "," + "guesser" + "," + data.getUsername();
@@ -160,11 +156,10 @@ public class GameServer extends AbstractServer {
 			}
 		}
 		else if (arg0 instanceof String) {
+			
 			String message = (String)arg0;
 			
-			String[] clientResponse = message.split(",");
-			
-			if (message.equals("getWordList")) {
+			if (message.equals("getPrompt")) {
 				ArrayList<String> promptData = new ArrayList<String>();
 
 		        try {
@@ -175,31 +170,18 @@ public class GameServer extends AbstractServer {
 		        }
 		        ArrayList<String> prompts = promptData;
 		        
-		        String clientPromptList = "WordList,";
+		        Random r = new Random();
+				int randomWordIndex = r.nextInt(prompts.size());
 		        
-		        for(int i = 0; i < prompts.size(); i++) {
-		        	clientPromptList += prompts.get(i) + ","; 
-		        }
-		        
-		        log.append("Server generated list of prompts\n");
-		        
+		    
 		        try {
-					arg1.sendToClient(clientPromptList);
+					arg1.sendToClient("Prompt," + prompts.get(randomWordIndex));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-			else if (clientResponse[0].equals("RoundWord")) {
-				
-				try {
-					arg1.sendToClient("RoundWord," + clientResponse[1]);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
+		
 		}
 	}
 	// Method that handles listening exceptions by displaying exception information.

@@ -20,7 +20,7 @@ import javax.swing.border.Border;
 
 public class DrawingPanel extends JPanel {
 	private DrawingField drawingField;
-	private JLabel prompt;
+	private JLabel prompt = new JLabel();
 	private JLabel role;
 	private JLabel score;
 	
@@ -36,10 +36,6 @@ public class DrawingPanel extends JPanel {
 	public String getPrompt() {
 		return prompt.getText();
 	}
-	
-	public void setPrompt(String prompt) {
-		this.prompt.setText(prompt);
-	}
 
 	public void setRole(JLabel role) {
 		this.role = role;
@@ -47,7 +43,7 @@ public class DrawingPanel extends JPanel {
 	
 	public void setPromptWord(String promptWord)
 	{
-		prompt.setText(promptWord);
+		this.prompt.setText(promptWord);
 	}
 	
 	public void setScore(int scoreCT) {
@@ -62,7 +58,6 @@ public class DrawingPanel extends JPanel {
 		drawingField.setBorder(BorderFactory.createTitledBorder(blackline, "DrawingField"));
 
 		JPanel topPanel = new JPanel(new GridLayout(1, 1, 10, 10));
-		JLabel prompt = new JLabel("", JLabel.CENTER);
 		prompt.setFont(new Font("Verdana", Font.PLAIN, 35));
 		topPanel.add(prompt);
 
@@ -70,13 +65,16 @@ public class DrawingPanel extends JPanel {
 		JPanel middlePanel = new JPanel();
 		middlePanel.add(drawingField);
 
-		JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 10, 10));
-		JButton button1 = new JButton("submit drawing");
-		JButton button2 = new JButton("clear screen");
-		button1.addActionListener(drawingControl);
-		button2.addActionListener(drawingControl);
-		buttonPanel.add(button1);
-		buttonPanel.add(button2);
+		JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 10, 10));
+        JButton button1 = new JButton("submit drawing");
+        JButton button2 = new JButton("clear screen");
+        JButton button3 = new JButton("get prompt");
+        button1.addActionListener(drawingControl);
+        button2.addActionListener(drawingControl);
+        button3.addActionListener(drawingControl);
+        buttonPanel.add(button1);
+        buttonPanel.add(button2);
+        buttonPanel.add(button3); 
 		
 
 		this.add(topPanel, BorderLayout.NORTH);

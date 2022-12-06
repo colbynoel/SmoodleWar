@@ -107,6 +107,14 @@ public class GameControl implements ActionListener{
 			CardLayout cardLayout = (CardLayout) container.getLayout();
 			cardLayout.show(container, "5");
 		}
+		else if (command == "get prompt") {
+			try {
+				client.sendToServer("getPrompt");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 		else if (command == "End Game") {
 			//Reset Game Data
 			gameData.setCurrentScore(0);
@@ -118,40 +126,15 @@ public class GameControl implements ActionListener{
 		}
 	}
 
-	public void recieveRandomPrompts() {
-		try {
-			client.sendToServer("getWordList");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		String[] wordList = gameData.getWordList();
-		
-		Random r = new Random();
-		int randomWordIndex = r.nextInt(wordList.length);
-		
+	public void recieveRandomPrompt(String prompt) {
 		//Grabs drawing panel out of the container to use it's methods 
 		DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(4);
 		
-		//Set random word to be later checked during guessing round
-		roundWord = wordList[randomWordIndex];
-		
-		//Set roundword in server
-		try {
-			client.sendToServer("RoundWord," + roundWord);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		//Sets prompt word to be the randomly selected word
-		drawingPanel.setPromptWord(roundWord);
+		drawingPanel.setPromptWord(prompt);
+		drawingPanel.update(drawingPanel.getGraphics());
 	}
 	
-	public void setWordList() {
-		
-	}
 
 	//If user has guessed correctly 3 times, send gameData object to server to end game
 	public void endGame() throws IOException {
@@ -165,7 +148,12 @@ public class GameControl implements ActionListener{
 		guessingPanel.setTFCorrect(tfCorrect);
 		
 		//Get a new random word
-		recieveRandomPrompts();
+		try {
+			client.sendToServer("getPrompt");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
