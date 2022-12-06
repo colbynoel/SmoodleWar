@@ -29,13 +29,21 @@ public class LobbyControl implements ActionListener{
 		// The Cancel button takes the user back to the initial panel.
 		if (command == "Join a Game") {
 			CardLayout cardLayout = (CardLayout) container.getLayout();
-			cardLayout.show(container, "1");
+			//temp until we figure out players
+			cardLayout.show(container, "5");
+			
+//			if (player == drawer)
+//				cardLayout.show(container, "5");
+//			else
+//				cardLayout.show(container, "6");
+			
 		}
 
 		// The Submit button creates a new account.
 		else if (command == "Logout") {
-			// Get the text the user entered in the three fields.
-			LobbyPanel lobbyPanel = (LobbyPanel) container.getComponent(2);
+			
+			CardLayout cardLayout = (CardLayout) container.getLayout();
+			cardLayout.show(container, "1");
 		}
 //		// Submit the new account information to the server.
 //		CreateAccountData data = new CreateAccountData(username, password);
