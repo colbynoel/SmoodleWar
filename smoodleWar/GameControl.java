@@ -64,7 +64,7 @@ public class GameControl implements ActionListener{
 			//Grabs drawing panel out of the container to use it's methods 
 			DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(5);
 			
-			//Recieves entered users guess
+			//Receives entered users guess
 			String playerGuess = guessingPanel.getGuess();
 			
 			if (playerGuess.equals(roundWord)) {
@@ -124,7 +124,7 @@ public class GameControl implements ActionListener{
 		int randomWordIndex = r.nextInt(wordList.length);
 		
 		//Grabs drawing panel out of the container to use it's methods 
-		DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(6);
+		DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(4);
 		
 		//Set random word to be later checked during guessing round
 		roundWord = wordList[randomWordIndex];
@@ -141,7 +141,7 @@ public class GameControl implements ActionListener{
 
 	public void endRound(String tfCorrect) {
 		//Grabs drawing guessing out of the container to use it's methods 
-		GuessingPanel guessingPanel = (GuessingPanel) container.getComponent(6);
+		GuessingPanel guessingPanel = (GuessingPanel) container.getComponent(5);
 		
 		guessingPanel.setTFCorrect(tfCorrect);
 		

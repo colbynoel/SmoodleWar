@@ -16,10 +16,13 @@ public class GameServer extends AbstractServer {
 	private boolean running = false;
 	private Database database;
 
+	private boolean isDrawer;
+	
 	// Constructor for initializing the server with default settings.
 	public GameServer() {
 		super(12345);
 		this.setTimeout(500);
+		isDrawer = false;
 	}
 
 	void setDatabase(Database database) {
@@ -83,7 +86,16 @@ public class GameServer extends AbstractServer {
 				result = new Error("The username and password are incorrect.", "Login");
 				log.append("Client " + arg1.getId() + " failed to log in\n");
 			}
-
+			
+			// We determine who will be assigned the drawer and guesser role initially
+			// here.
+			if(!isDrawer) {
+				isDrawer = true;
+				result = result + "," + "drawer";
+			}
+			else
+				result = result + "," + "guesser";
+			
 			// Send the result to the client.
 			try {
 				arg1.sendToClient(result);
@@ -115,10 +127,11 @@ public class GameServer extends AbstractServer {
 			
 		}else if (arg0 instanceof ArrayList<?>) {
 			ArrayList<Point> coordinates = (ArrayList<Point>) arg0;
-			if (coordinates.equals(null)) {
-				log.append("Arraylist is null.\n");
+			if (coordinates.isEmpty()) {
+				log.append("Arraylist is empty.\n");
 			}
 			log.append("\nServer Recieved Drawing Coords List from client " + arg1.getId() + "\n");
+
 			super.sendToAllClients(coordinates);
 			
 		}else if (arg0 instanceof DeleteAccountData) {
