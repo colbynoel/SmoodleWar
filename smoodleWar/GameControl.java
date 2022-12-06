@@ -2,10 +2,12 @@ package smoodleWar;
 
 import java.awt.CardLayout;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -14,7 +16,7 @@ public class GameControl implements ActionListener{
 	
 	private JPanel container;
 	private GameClient client;
-	private Graphics drawing;
+	private ArrayList<Point> coordinates;
 	private GameData gameData;
 	private String roundWord;
 	private int incorrectGuesses;
@@ -39,13 +41,13 @@ public class GameControl implements ActionListener{
 		if(command == "submit drawing") {
 			
 			//Grabs drawing panel out of the container to use it's methods 
-			DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(5);
+			DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(4);
 			
 			//Get drawing out of the drawing panel. 
-			drawing = drawingPanel.getDrawing();
+			coordinates = drawingPanel.getDrawing();
 			
 			try {
-				client.sendToServer(drawing);
+				client.sendToServer(coordinates);
 			}
 			catch (IOException ex) {
 				ex.printStackTrace();
@@ -62,7 +64,7 @@ public class GameControl implements ActionListener{
 			//Grabs drawing panel out of the container to use it's methods 
 			DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(5);
 			
-			//Recieves entered users guess
+			//Receives entered users guess
 			String playerGuess = guessingPanel.getGuess();
 			
 			if (playerGuess.equals(roundWord)) {
@@ -122,7 +124,7 @@ public class GameControl implements ActionListener{
 		int randomWordIndex = r.nextInt(wordList.length);
 		
 		//Grabs drawing panel out of the container to use it's methods 
-		DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(6);
+		DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(4);
 		
 		//Set random word to be later checked during guessing round
 		roundWord = wordList[randomWordIndex];
@@ -139,7 +141,7 @@ public class GameControl implements ActionListener{
 
 	public void endRound(String tfCorrect) {
 		//Grabs drawing guessing out of the container to use it's methods 
-		GuessingPanel guessingPanel = (GuessingPanel) container.getComponent(6);
+		GuessingPanel guessingPanel = (GuessingPanel) container.getComponent(5);
 		
 		guessingPanel.setTFCorrect(tfCorrect);
 		
@@ -153,12 +155,12 @@ public class GameControl implements ActionListener{
 		cardLayout.show(container, "5");
 	}
 	
-	public void switchGameScreen(Graphics opponentDrawing) {
+	public void switchGameScreen(ArrayList<Point> opponentDrawing) {
 		//Server always sends submitted drawing objects (including clients), game will only update to guessing screen if opponent drawing is 
 		//recieved.
-		if (opponentDrawing != drawing)
+		if (!opponentDrawing.equals(coordinates))
 		{
-			GuessingPanel guessingPanel = (GuessingPanel) container.getComponent(2);
+			GuessingPanel guessingPanel = (GuessingPanel) container.getComponent(5);
 			guessingPanel.setOpponentDrawing(opponentDrawing);
 			CardLayout cardLayout = (CardLayout) container.getLayout();
 			cardLayout.show(container, "6");

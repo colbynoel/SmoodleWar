@@ -1,7 +1,9 @@
 package smoodleWar;
 
 import java.awt.Graphics;
+import java.awt.Point;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -45,11 +47,14 @@ public class GameClient extends AbstractClient {
 		// of the project
 		if (arg0 instanceof String) {
 			// Stringify the response
-			String serverResponse = (String) arg0;
+			String serverMessage = (String) arg0;
+			// serverResponse[0] = actual response
+			// serverResponse[1] = drawer/guesser
+			String[] serverResponse = serverMessage.split(",");
 
 			// Successful Login
-			if (serverResponse.equals("LoginSuccessful")) {
-				user = loginControl.loginSuccess();
+			if (serverResponse[0].equals("LoginSuccessful")) {
+				user = loginControl.loginSuccess(serverResponse[1]);
 			}
 
 			// Create Account Verification
@@ -80,9 +85,9 @@ public class GameClient extends AbstractClient {
 		}
 		
 		//Recieves Graphics object from server and sends to client to update to Guessing round if not 
-		else if (arg0 instanceof Graphics)
+		else if (arg0 instanceof ArrayList<?>)
 		{
-			Graphics opponentDrawing = (Graphics)arg0;
+			ArrayList<Point> opponentDrawing = (ArrayList<Point>)arg0;
 			gameControl.switchGameScreen(opponentDrawing);
 		}
 

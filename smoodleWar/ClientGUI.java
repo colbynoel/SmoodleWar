@@ -78,7 +78,7 @@ public class ClientGUI extends JFrame {
 		this.add(container);
 
 		// Show the JFrame.
-		this.setSize(750, 650);
+		this.setSize(750, 700);
 		this.setVisible(true);
 	}
 
