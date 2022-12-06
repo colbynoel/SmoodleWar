@@ -58,12 +58,12 @@ public class GameClient extends AbstractClient {
 			}
 
 			// Create Account Verification
-			else if (serverResponse.equals("CreateAccountSuccessful")) {
+			else if (serverMessage.equals("CreateAccountSuccessful")) {
 				createAccountControl.createAccountSuccess();
 			}
 
 			// Delete Account Verification
-			else if (serverResponse.equals("AccountDeletionSuccesful")) {
+			else if (serverMessage.equals("AccountDeletionSuccesful")) {
 				deleteAccountControl.deleteAccountSuccess();
 			}
 			else if (serverResponse[0].equals("RoundWord")) {

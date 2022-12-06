@@ -67,13 +67,7 @@ public class LobbyPanel extends JPanel {
 		labelPanel.add(instructionLabel);
 		labelPanel.add(instructionLabel2);
 
-		// Create a panel for the account information form.
-		JPanel accountPanel = new JPanel(new GridLayout(3, 2, 5, 5));
-		JLabel usernameLabel = new JLabel("Welcome " + this.username, JLabel.CENTER);
-//		
-		accountPanel.add(usernameLabel);
-//		
-
+		
 		// Create a panel for the buttons.
 		JPanel buttonPanel = new JPanel();
 		JButton submitButton = new JButton("Join a Game");
@@ -86,7 +80,7 @@ public class LobbyPanel extends JPanel {
 		// Arrange the three panels in a grid.
 		JPanel grid = new JPanel(new GridLayout(3, 1, 0, 10));
 		grid.add(labelPanel);
-		grid.add(accountPanel);
+		
 		grid.add(buttonPanel);
 		this.add(grid);
 	}

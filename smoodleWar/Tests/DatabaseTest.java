@@ -1,4 +1,4 @@
-package smoodleWar;
+package smoodleWar.Tests;
 
 import static org.junit.Assert.*;
 
