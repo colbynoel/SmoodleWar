@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class GameControl implements ActionListener{
@@ -69,38 +70,46 @@ public class GameControl implements ActionListener{
 			String playerGuess = guessingPanel.getGuess();
 			
 			if (playerGuess.equals(roundWord)) {
-				
-				//Let's Player Know their guess was correct
-				
 				//Get the current score from game data and increment it
 				int score = gameData.getCurrentScore();
 				score++;
 				
+				//Let's Player Know their guess was correct
+				int input = JOptionPane.showConfirmDialog(guessingPanel, "You Guessed Correctly! Your score is " + score + "/3", "Lucky Guess", JOptionPane.DEFAULT_OPTION);
+				
 				//Update gameDatas current score
 				gameData.setCurrentScore(score);
 				
-				//Update the visual "Player Score" in drawingPanel
-				drawingPanel.setScore(score);
-				
 				//If current score is 3, end the game
-				if (gameData.getCurrentScore() == 3)
+				if (input == 0 && gameData.getCurrentScore() == 3)
 				{
 					try {
-						endGame();
+						client.sendToServer("GameOver");
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+					
+					endGame();
 				}
 				else 
 				{
-					incorrectGuesses = 0;
-					endRound("Your Guess was Correct");
+					if (input == 0) {
+						endRound("Opponent Guessed Correctly");
+					}
 				}
 			}
-			else {
+			else if (!playerGuess.equals(roundWord)) {
 				incorrectGuesses++;
-				endRound("Your Guess Was Incorrect");
+				
+				//Let's Player Know their guess was correct
+				int input = JOptionPane.showConfirmDialog(guessingPanel, "Whoops, you were wrong. Try again! Incorrect Guesses: " 
+				+ incorrectGuesses + "/3", "Tough Break", JOptionPane.DEFAULT_OPTION);
+				
+				if (incorrectGuesses == 3) {
+					endRound("Opponent Failed");
+				}
+				
 			}
 		}
 		else if (command == "Next Drawing") {
@@ -115,18 +124,12 @@ public class GameControl implements ActionListener{
 				e1.printStackTrace();
 			}
 		}
-		else if (command == "End Game") {
-			//Reset Game Data
-			gameData.setCurrentScore(0);
-			gameData.setRoomCode("");
-			
-			//Show lobby screen
-			CardLayout cardLayout = (CardLayout) container.getLayout();
-			cardLayout.show(container, "7");
-		}
 	}
 
 	public void recieveRandomPrompt(String prompt) {
+		//Set prompt
+		roundWord = prompt;
+		
 		//Grabs drawing panel out of the container to use it's methods 
 		DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(4);
 		
@@ -137,19 +140,30 @@ public class GameControl implements ActionListener{
 	
 
 	//If user has guessed correctly 3 times, send gameData object to server to end game
-	public void endGame() throws IOException {
-		client.sendToServer(gameData);
+	public void endGame() {
+	 	int input = 999;
+		
+		if (gameData.getCurrentScore() == 3) {
+			input = JOptionPane.showConfirmDialog(null, "You Win!", "Winner!", JOptionPane.DEFAULT_OPTION);
+		}
+		else {
+			input = JOptionPane.showConfirmDialog(null, "Your Opponent Won! :(", "Loser!", JOptionPane.DEFAULT_OPTION);
+		}
+		
+		if (input == 0) {
+			//Show lobby screen
+			CardLayout cardLayout = (CardLayout) container.getLayout();
+			cardLayout.show(container, "7");
+		}
+		
+		//Reset Game Data
+		gameData.setCurrentScore(0);
 	}
 
-	public void endRound(String tfCorrect) {
-		//Grabs drawing guessing out of the container to use it's methods 
-		GuessingPanel guessingPanel = (GuessingPanel) container.getComponent(5);
+	public void endRound(String roundOverText) {
 		
-		guessingPanel.setTFCorrect(tfCorrect);
-		
-		//Get a new random word
 		try {
-			client.sendToServer("getPrompt");
+			client.sendToServer(roundOverText);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -166,7 +180,7 @@ public class GameControl implements ActionListener{
 		cardLayout.show(container, "5");
 	}
 	
-	public void switchGameScreen(ArrayList<Point> opponentDrawing) {
+	public void sendDrawing(ArrayList<Point> opponentDrawing) {
 		//Server always sends submitted drawing objects (including clients), game will only update to guessing screen if opponent drawing is 
         //recieved.
         if (!opponentDrawing.equals(coordinates))
@@ -176,6 +190,25 @@ public class GameControl implements ActionListener{
             CardLayout cardLayout = (CardLayout) container.getLayout();
             cardLayout.show(container, "6");
         }
+	}
+	
+	public void switchPlayerRoles(String serverResponse) {
+		GuessingPanel guessingPanel = (GuessingPanel) container.getComponent(5);
+		DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(4);
+		
+		CardLayout cardLayout = (CardLayout) container.getLayout();
+		
+		if (guessingPanel.isShowing()) {
+			cardLayout.show(container, "5");
+		}
+		else if (drawingPanel.isShowing()) {
+			int input = JOptionPane.showConfirmDialog(guessingPanel, serverResponse, "Round Info", JOptionPane.DEFAULT_OPTION);
+			
+			if (input == 0) {
+				cardLayout.show(container, "6");
+			}
+		}
+		
 	}
 
 }

@@ -21,7 +21,7 @@ public class GuessingPanel extends JPanel {
 	
 	private DrawingField drawingField;
 	private JTextField guessingField;
-	private JLabel tfCorrect;
+	private JLabel tfCorrect = new JLabel();
 	
 
 	public GuessingPanel(GameControl gc) {
@@ -37,10 +37,12 @@ public class GuessingPanel extends JPanel {
 		
 		guessingField = new JTextField(JLabel.CENTER);
 		JButton guessButton = new JButton("Guess");
+		guessButton.addActionListener(gc);
 		
 		guessingPanel.add(guessLabel);
 		guessingPanel.add(guessingField);
 		guessingPanel.add(guessButton);
+		
 
 		
 		JPanel middlePanel = new JPanel();

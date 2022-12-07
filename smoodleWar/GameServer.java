@@ -103,9 +103,10 @@ public class GameServer extends AbstractServer {
 				}
 				
 			}
-			else
+			else {
+				isDrawer = false;
 				result = result + "," + "guesser" + "," + data.getUsername();
-			
+			}
 			// Send the result to the client.
 			try {
 				arg1.sendToClient(result);
@@ -161,7 +162,7 @@ public class GameServer extends AbstractServer {
 			
 			if (message.equals("getPrompt")) {
 				ArrayList<String> promptData = new ArrayList<String>();
-
+				
 		        try {
 		            promptData = database.getPrompt();
 		        } catch (SQLException e) {
@@ -174,12 +175,14 @@ public class GameServer extends AbstractServer {
 				int randomWordIndex = r.nextInt(prompts.size());
 		        
 		    
-		        try {
-					arg1.sendToClient("Prompt," + prompts.get(randomWordIndex));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				super.sendToAllClients("Prompt," + prompts.get(randomWordIndex));
+				
+			}
+			else if (message.equals("Opponent Failed") || message.equals("Opponent Guessed Correctly")) {
+				super.sendToAllClients("RoundEnd," + message);
+			}
+			else if (message.equals("GameOver")) {
+				super.sendToAllClients("GameEnd," + message);
 			}
 		
 		}

@@ -67,6 +67,12 @@ public class GameClient extends AbstractClient {
 			else if (serverResponse[0].equals("Prompt")) {
 				gameControl.recieveRandomPrompt(serverResponse[1]);
 			}
+			else if (serverResponse[0].equals("RoundEnd")) {
+				gameControl.switchPlayerRoles(serverResponse[1]);
+			}
+			else if (serverResponse[0].equals("GameEnd")) {
+				gameControl.endGame();
+			}
 			
 		}
 
@@ -83,7 +89,7 @@ public class GameClient extends AbstractClient {
 		else if (arg0 instanceof ArrayList<?>)
 		{
 			ArrayList<Point> opponentDrawing = (ArrayList<Point>)arg0;
-			gameControl.switchGameScreen(opponentDrawing);
+			gameControl.sendDrawing(opponentDrawing);
 		}
 
 		// If we received an Error, figure out where to display it.
