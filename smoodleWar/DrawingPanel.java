@@ -82,4 +82,9 @@ public class DrawingPanel extends JPanel {
 		this.add(buttonPanel, BorderLayout.SOUTH);
 
 	}
+	
+	// Calls drawingFields clear method
+	public void clearField() {
+		drawingField.clear();
+	}
 }
