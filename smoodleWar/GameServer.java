@@ -141,7 +141,7 @@ public class GameServer extends AbstractServer {
 			if (coordinates.isEmpty()) {
 				log.append("Arraylist is empty.\n");
 			}
-			log.append("\nServer Recieved Drawing Coords List from client " + arg1.getId() + "\n");
+			log.append("Server Recieved Drawing Coords List from client " + arg1.getId() + "\n");
 
 			super.sendToAllClients(coordinates);
 			
