@@ -56,8 +56,10 @@ public class GameControl implements ActionListener{
 				System.err.println("Couldn't send drawing");
 			}
 		}
-		else if (command == "clear drawing") {
+		else if (command == "clear screen") {
 			// Let's clear the drawing field to reset on player request
+			DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(4);
+			drawingPanel.clearField();
 		}
 		else if (command == "Guess") {
 			//Grabs drawing guessing out of the container to use it's methods 
@@ -195,6 +197,10 @@ public class GameControl implements ActionListener{
 	public void switchPlayerRoles(String serverResponse) {
 		GuessingPanel guessingPanel = (GuessingPanel) container.getComponent(5);
 		DrawingPanel drawingPanel = (DrawingPanel) container.getComponent(4);
+		
+		// Reset each panels drawingField
+		guessingPanel.clearField();
+		drawingPanel.clearField();
 		
 		CardLayout cardLayout = (CardLayout) container.getLayout();
 		
