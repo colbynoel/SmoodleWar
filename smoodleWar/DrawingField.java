@@ -46,6 +46,12 @@ public class DrawingField extends JPanel implements MouseListener, MouseMotionLi
 		return coordinates;
 	}
 	
+	// Clears the playing field with an empty ArrayList
+	public void clear() {
+		this.coordinates = new ArrayList<Point>();
+		repaint();
+	}
+	
 	// This method is for displaying the drawing on the guesser's pov
 	public void setDrawingCoords(ArrayList<Point> coordinates) {
 		this.coordinates = coordinates;
