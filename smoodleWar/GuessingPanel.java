@@ -67,6 +67,11 @@ public class GuessingPanel extends JPanel {
 		drawingField.setDrawingCoords(opponentDrawing);
 	}
 	
+	// Calls drawingFields clear method
+	public void clearField() {
+		drawingField.clear();
+	}
+	
 	// Getter for the text in the guess field.
 	public String getGuess() {
 		return new String(guessingField.getText());
